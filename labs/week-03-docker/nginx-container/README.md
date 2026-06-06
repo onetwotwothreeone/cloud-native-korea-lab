@@ -23,3 +23,8 @@ docker run -d --name cnkl-nginx -p 8080:80 nginx:latest
 docker ps
 curl -I http://localhost:8080
 docker logs cnkl-nginx
+
+## Troubleshooting
+
+이번 실습에서는 Docker 미설치, Docker Engine 상태, heredoc 입력 모드, Git 저장소 경로 문제를 경험했다.  
+각 문제를 해결하면서 Docker CLI, Docker Engine, 컨테이너 포트 매핑, Git 저장소 구조를 함께 이해할 수 있었다.
