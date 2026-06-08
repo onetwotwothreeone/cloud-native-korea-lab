@@ -1,0 +1,9 @@
+services:
+  mini-platform:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      APP_VERSION: v0.1.0
