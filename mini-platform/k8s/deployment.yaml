@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mini-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mini-platform
+  template:
+    metadata:
+      labels:
+        app: mini-platform
+    spec:
+      containers:
+        - name: mini-platform
+          image: cloud-native-mini-platform:v0.1.0
+          ports:
+            - containerPort: 3000
