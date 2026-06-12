@@ -139,6 +139,7 @@ Prometheus와 Grafana 기반 모니터링 설정을 관리합니다.
 10. Terraform
 11. Cloud Platform
 12. Figma-based Design and Visualization
+13. iOS App Experience and Mobile Distribution
 
 ## Tool Usage
 
@@ -148,6 +149,7 @@ Prometheus와 Grafana 기반 모니터링 설정을 관리합니다.
 - Google Calendar / Tasks: 학습 루틴 관리
 - Naver Cafe: 커뮤니티 본점
 - Figma: AI Docs Agent 화면 설계, 구조도, 카드뉴스 제작
+- iOS Developer / Apple Developer: AI Docs Agent의 iPhone 앱 확장, 모바일 학습 경험 설계, 테스트 배포 준비
 - Docker: AI Docs Agent를 컨테이너로 포장하고 실행
 - Kubernetes: AI Docs Agent를 운영 환경에서 관리
 - GitHub Actions: 빌드와 테스트 자동화
@@ -171,6 +173,20 @@ User Question
 ```
 
 처음부터 완전한 AI/RAG 시스템을 만들기보다, 먼저 질문을 받고 정해진 답변 템플릿으로 응답하는 구조를 만든 뒤, 공식 문서 검색과 RAG 구조를 단계적으로 붙입니다.
+
+## Future Mobile Direction
+
+Cloud Native AI Docs Agent는 먼저 웹/API 기반으로 만들고, 이후 iOS 앱으로 확장할 수 있습니다.
+
+모바일 확장 목표는 사용자가 iPhone에서 클라우드 네이티브 질문을 입력하고, 공식 문서 기반의 쉬운 설명과 실습 예시를 바로 확인할 수 있는 학습 경험을 만드는 것입니다.
+
+```text
+Web/API Agent
+→ Figma Mobile Wireframe
+→ iOS Learning App Prototype
+→ Test Distribution
+→ Community Feedback
+```
 
 ## Vision
 
