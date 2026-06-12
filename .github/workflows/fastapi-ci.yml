@@ -33,3 +33,19 @@ jobs:
       - name: Run tests
         run: |
           python -m pytest
+
+  build-docker-image:
+    runs-on: ubuntu-latest
+    needs: test-fastapi
+
+    defaults:
+      run:
+        working-directory: mini-platform
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t cnkl-fastapi-mini-platform:ci .
