@@ -1,0 +1,11 @@
+services:
+  fastapi-mini-platform:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: cnkl-fastapi-mini-platform:0.1.0
+    container_name: cnkl-fastapi-mini-platform-compose
+    ports:
+      - "8001:8000"
+    environment:
+      - APP_VERSION=0.1.0
