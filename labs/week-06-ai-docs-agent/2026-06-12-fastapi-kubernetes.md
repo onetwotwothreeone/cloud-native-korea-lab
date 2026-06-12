@@ -60,7 +60,7 @@ Deployment는 FastAPI Pod를 원하는 상태로 유지한다.\
 Service는 Pod로 가는 안정적인 네트워크 입구다.\
 Endpoint는 Service가 실제로 연결한 Pod 주소를 보여준다.\
 port-forward는 내 MacBook과 Kubernetes Service를 임시로 연결한다.\
-Docker Compose는 로컬 실행에 좋고, Kubernetes는 운영 방식에 가깝다.\
+Docker Compose는 로컬 실행에 좋고, Kubernetes는 운영 방식에 가깝다.
 
 ## 7. 다음 실습
 
