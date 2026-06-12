@@ -23,12 +23,21 @@ GET  /docs
 ```
 
 - `/` : 기본 홈 응답
-- `/health` : Docker, Kubernetes 상태 확인용 API
+- `/health` : Docker, Kubernetes, readinessProbe, livenessProbe 상태 확인용 API
 - `/version` : 앱 버전, 언어, 프레임워크 확인
 - `/ask` : Cloud Native AI Docs Agent의 질문 접수 API
 - `/docs` : FastAPI 자동 API 문서
 
 현재 `/ask`는 실제 AI/RAG를 연결하기 전 단계이며, 고정된 예시 응답을 반환합니다.
+
+---
+
+## Project Identity
+
+```text
+클라우드 네이티브를 설명하는 AI를
+클라우드 네이티브 방식으로 운영한다.
+```
 
 ---
 
@@ -48,6 +57,9 @@ GET  /docs
 cloud-native-korea-lab
 ├── README.md
 ├── .python-version
+├── .github
+│   └── workflows
+│       └── fastapi-ci.yml
 ├── roadmap
 ├── labs
 │   ├── week-01-linux-git
@@ -63,9 +75,14 @@ cloud-native-korea-lab
 ├── content
 ├── portfolio
 └── mini-platform
+    ├── README.md
     ├── app
+    │   ├── __init__.py
     │   └── main.py
+    ├── tests
+    │   └── test_main.py
     ├── requirements.txt
+    ├── pytest.ini
     ├── Dockerfile
     ├── .dockerignore
     ├── compose
@@ -83,9 +100,11 @@ cloud-native-korea-lab
 Language: Python 3.13.13
 API Framework: FastAPI
 ASGI Server: Uvicorn
+Test: pytest, httpx, FastAPI TestClient
 Container: Docker
 Local Container Orchestration: Docker Compose
 Kubernetes: Docker Desktop Kubernetes
+CI: GitHub Actions
 ```
 
 ---
@@ -98,10 +117,14 @@ Kubernetes: Docker Desktop Kubernetes
 - Python FastAPI 전환
 - FastAPI `/`, `/health`, `/version`, `/ask` API 구현
 - FastAPI `/docs` 자동 문서 확인
+- pytest 기반 로컬 테스트 준비
 - FastAPI Docker 이미지 빌드
 - FastAPI Docker Compose 실행
 - FastAPI Kubernetes Deployment/Service 실행
 - readinessProbe/livenessProbe 추가
+- GitHub Actions로 FastAPI 테스트 자동화
+- GitHub Actions로 Docker 이미지 빌드 자동화
+- 루트 README와 mini-platform README 최신화
 
 ---
 
@@ -115,25 +138,43 @@ Kubernetes: Docker Desktop Kubernetes
 6. Kubernetes
 7. Kubernetes Health Check
 8. CI/CD
-9. Helm
-10. Argo CD
-11. Monitoring
-12. Terraform
-13. Cloud Platform
+9. Kubernetes ConfigMap / Secret
+10. Helm
+11. Argo CD
+12. Monitoring
+13. Terraform
+14. Cloud Platform
+15. Official Docs-based RAG
+
+---
+
+## Current Focus
+
+현재 집중할 것은 GitHub Actions로 자동화된 테스트와 Docker 이미지 빌드 흐름을 안정적으로 기록하고, Kubernetes 운영 설정을 다음 단계로 확장하는 것입니다.
+
+현재 CI 흐름은 다음과 같습니다.
+
+```text
+push / pull_request
+→ Python 3.13 설정
+→ requirements.txt 설치
+→ python -m pytest
+→ docker build
+```
 
 ---
 
 ## Next Steps
 
-1. README 최신화 완료
-2. Kubernetes 리소스 정리 완료
-3. GitHub Actions로 FastAPI 앱 테스트 자동화
-4. Docker 이미지 빌드 자동화
-5. Kubernetes manifest 개선
-6. Helm Chart 작성
-7. Argo CD GitOps 배포
-8. Prometheus/Grafana 모니터링 연결
-9. 공식 문서 기반 RAG 구조 설계
+1. GitHub Actions 실행 결과 확인 및 실습 기록 정리
+2. Kubernetes ConfigMap / Secret 적용
+3. Kubernetes manifest 개선
+4. Helm Chart 작성
+5. Argo CD GitOps 배포
+6. Prometheus / Grafana 모니터링 연결
+7. 공식 문서 기반 RAG 구조 설계
+8. 실제 AI 응답 연결
+9. Cloud 배포 구조 설계
 
 ---
 
