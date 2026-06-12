@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-mini-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-mini-platform
+  template:
+    metadata:
+      labels:
+        app: fastapi-mini-platform
+    spec:
+      containers:
+        - name: fastapi-mini-platform
+          image: cnkl-fastapi-mini-platform:0.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: APP_VERSION
+              value: "0.1.0"
