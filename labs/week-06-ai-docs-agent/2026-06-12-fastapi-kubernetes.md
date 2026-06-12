@@ -18,7 +18,9 @@ mini-platform
 └── k8s
     ├── deployment.yaml
     └── service.yaml
-4. 실행한 명령어
+```
+## 4. 실행한 명령어
+```
 cd ~/cloud-native-korea-lab/mini-platform
 
 kubectl config get-contexts
@@ -33,15 +35,16 @@ kubectl get svc
 kubectl get endpoints fastapi-mini-platform-service
 
 kubectl port-forward service/fastapi-mini-platform-service 8002:80
-
+```
 새 터미널에서 테스트:
-
+```
 curl http://localhost:8002/health
 curl http://localhost:8002/version
 
 curl -X POST http://localhost:8002/ask \
   -H "Content-Type: application/json" \
   -d '{"question":"Kubernetes에서 Service는 왜 필요한가요?"}' | python3 -m json.tool
+```
 ## 5. 성공 확인 결과
 Kubernetes context docker-desktop 설정 확인
 Node docker-desktop Ready 확인
