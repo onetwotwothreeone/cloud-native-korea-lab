@@ -1,15 +1,30 @@
 # Cloud Native Korea Lab
 
-Cloud Native Korea Lab은 클라우드 네이티브를 공부하면서, 초보자도 쉽게 따라올 수 있는 한국어 교육 콘텐츠와 실습 기록을 쌓아가는 학습 Repository입니다.
+Cloud Native Korea Lab은 공식 문서 기반 Cloud Native AI Docs Agent를 만들고, 그 에이전트를 Docker, Kubernetes, CI/CD, GitOps, Monitoring, Terraform으로 운영하면서 초보자도 쉽게 따라올 수 있는 한국어 클라우드 네이티브 교육 콘텐츠와 커뮤니티를 만드는 프로젝트입니다.
 
 ## 목적
 
-- Linux, Git, Network, Docker, Kubernetes 등 클라우드 네이티브 기초 학습
+- 공식 문서 기반 Cloud Native AI Docs Agent 만들기
+- Docker, Kubernetes, CI/CD, GitOps, Monitoring, Terraform을 프로젝트 중심으로 학습하기
+- 클라우드 네이티브 전문 지식을 12살도 이해할 수 있을 만큼 쉽게 설명하되, 개념은 정확하게 정리하기
 - 실습 중심의 학습 기록 관리
-- 에러 해결 과정을 문서화
-- 커뮤니티 공유용 콘텐츠 제작
+- 에러 해결 과정을 문서화하고 커뮤니티 학습 자료로 전환하기
+- 네이버 카페 공유용 콘텐츠 제작
 - 포트폴리오로 활용 가능한 프로젝트 기록 축적
-- Cloud Native Korea Lab Mini Platform을 끝까지 완성하며 프로젝트 중심으로 학습
+- 최종적으로 한국에서 가장 초보자 친화적인 클라우드 네이티브 교육 커뮤니티로 성장하기
+
+## Project Identity
+
+Cloud Native Korea Lab의 핵심 프로젝트는 `mini-platform`입니다.
+
+`mini-platform`은 단순한 작은 웹 앱이 아니라, 클라우드 네이티브 질문에 대해 공식 문서를 참고하여 쉽고 정확하게 답변하는 AI Docs Agent입니다.
+
+이 프로젝트의 핵심 문장은 다음과 같습니다.
+
+```text
+클라우드 네이티브를 설명하는 AI를
+클라우드 네이티브 방식으로 운영한다.
+```
 
 ## Operating Principle
 
@@ -37,17 +52,13 @@ cloud-native-korea-lab
 ├── content
 ├── portfolio
 └── mini-platform
-    ├── README.md
     ├── app
-    │   ├── package.json
-    │   └── server.js
+    ├── agent
+    ├── docs-sources
+    ├── rag
     ├── docker
-    │   └── Dockerfile
     ├── compose
-    │   └── docker-compose.yml
     ├── k8s
-    │   ├── deployment.yaml
-    │   └── service.yaml
     ├── helm
     ├── cicd
     ├── gitops
@@ -76,7 +87,43 @@ cloud-native-korea-lab
 실습 내용을 포트폴리오 형식으로 정리합니다.
 
 ### mini-platform
-Cloud Native Korea Lab Mini Platform 프로젝트를 관리합니다. 작은 웹 앱을 만들고 Docker, Docker Compose, Kubernetes, Helm, CI/CD, Argo CD, Monitoring, Terraform, Cloud 배포까지 단계적으로 확장합니다.
+공식 문서 기반 Cloud Native AI Docs Agent를 관리합니다. 이 에이전트는 사용자의 클라우드 네이티브 질문을 받고, 공식 문서를 참고해 핵심 요약, 쉬운 비유, 정확한 설명, 실습 예시, 에러 해결, 커뮤니티 공유용 글로 답변하는 것을 목표로 합니다.
+
+### mini-platform/app
+AI Docs Agent의 API 서버와 애플리케이션 코드를 관리합니다.
+
+### mini-platform/agent
+AI 에이전트의 역할, 답변 규칙, 답변 템플릿을 관리합니다.
+
+### mini-platform/docs-sources
+Docker, Kubernetes, Helm, Argo CD, Prometheus, Grafana, Terraform, Cloud 공식 문서 소스 목록을 관리합니다.
+
+### mini-platform/rag
+공식 문서를 수집하고, 질문과 관련된 문서를 찾고, 답변에 출처를 연결하는 RAG 구조를 관리합니다.
+
+### mini-platform/docker
+AI Docs Agent를 Docker 이미지로 만들기 위한 Dockerfile을 관리합니다.
+
+### mini-platform/compose
+로컬 환경에서 AI Docs Agent를 실행하기 위한 Docker Compose 설정을 관리합니다.
+
+### mini-platform/k8s
+Kubernetes에서 AI Docs Agent를 실행하기 위한 Deployment, Service 등 Manifest를 관리합니다.
+
+### mini-platform/helm
+Kubernetes 설정을 패키지로 관리하기 위한 Helm Chart를 관리합니다.
+
+### mini-platform/cicd
+GitHub Actions 등 CI/CD 자동화 설정을 관리합니다.
+
+### mini-platform/gitops
+Argo CD 기반 GitOps 배포 설정을 관리합니다.
+
+### mini-platform/monitoring
+Prometheus와 Grafana 기반 모니터링 설정을 관리합니다.
+
+### mini-platform/terraform
+클라우드 인프라를 코드로 관리하기 위한 Terraform 설정을 관리합니다.
 
 ## Learning Direction
 
@@ -88,10 +135,45 @@ Cloud Native Korea Lab Mini Platform 프로젝트를 관리합니다. 작은 웹
 6. CI/CD
 7. Helm
 8. Argo CD
-9. Monitoring
+9. Prometheus / Grafana Monitoring
 10. Terraform
 11. Cloud Platform
+12. Figma-based Design and Visualization
+
+## Tool Usage
+
+- ChatGPT: 학습 코치, 기획, 설명, 콘텐츠화
+- GitHub: 코드와 실습 기록 저장소
+- Google Drive: 문서 보관소
+- Google Calendar / Tasks: 학습 루틴 관리
+- Naver Cafe: 커뮤니티 본점
+- Figma: AI Docs Agent 화면 설계, 구조도, 카드뉴스 제작
+- Docker: AI Docs Agent를 컨테이너로 포장하고 실행
+- Kubernetes: AI Docs Agent를 운영 환경에서 관리
+- GitHub Actions: 빌드와 테스트 자동화
+- Argo CD: GitOps 방식의 배포 상태 관리
+- Prometheus / Grafana: 에이전트 상태 관찰
+- Terraform: 클라우드 인프라 코드화
+
+## Current Focus
+
+현재 집중할 것은 Cloud Native AI Docs Agent v0.1을 만드는 것입니다.
+
+첫 번째 구현 목표는 `/ask` API입니다.
+
+```text
+User Question
+→ /ask API
+→ Answer Template
+→ Beginner-friendly Explanation
+→ Official Docs Reference
+→ Community Content
+```
+
+처음부터 완전한 AI/RAG 시스템을 만들기보다, 먼저 질문을 받고 정해진 답변 템플릿으로 응답하는 구조를 만든 뒤, 공식 문서 검색과 RAG 구조를 단계적으로 붙입니다.
 
 ## Vision
 
 한국에서 가장 초보자 친화적인 클라우드 네이티브 학습 커뮤니티를 만드는 것을 목표로 합니다.
+
+최종적으로는 공식 문서 기반 Cloud Native AI Docs Agent를 통해 초보자가 Docker, Kubernetes, CI/CD, GitOps, Monitoring, Terraform, Cloud를 실습 중심으로 배우고, 에러 해결과 포트폴리오 제작까지 이어갈 수 있도록 돕습니다.
