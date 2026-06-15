@@ -2,7 +2,7 @@
 
 이 문서는 Cloud Native Korea Lab에서 클라우드 네이티브 관련 채용공고를 학습 자료로 바꾸기 위한 템플릿입니다.
 
-단순히 채용공고를 모으는 것이 아니라, 공고에 등장하는 기술 요구사항을 학습 로드맵, 실습, 포트폴리오와 연결하는 것이 목적입니다.
+단순히 채용공고를 모으는 것이 아니라, 공고에 등장하는 기술 요구사항을 학습 로드맵, 실습, 기업 테크 노트, 포트폴리오와 연결하는 것이 목적입니다.
 
 ---
 
@@ -52,7 +52,52 @@ CI/CD 도구로 테스트와 배포 과정을 자동화합니다.
 
 ---
 
-## 4. Learning Roadmap Mapping
+## 4. Related Company Tech Notes
+
+채용공고와 함께 기업 테크 블로그, 테크 노트, 엔지니어링 블로그를 참고합니다.
+
+테크 노트는 회사가 최근 어떤 기술 문제를 해결했고, 어떤 기술에 관심을 보이는지 파악하기 위한 참고자료입니다.
+단, 테크 노트 하나를 회사 전체의 공식 전략으로 단정하지 않습니다.
+
+```text
+Company Tech Note Title:
+Original Link:
+Published Date:
+Main Topic:
+Technologies Mentioned:
+Related Job Requirement:
+Related Cloud Native Korea Lab:
+Portfolio Evidence:
+Interview Preparation Point:
+```
+
+예시:
+
+```text
+Main Topic:
+Kubernetes 기반 배포 안정화
+
+Technologies Mentioned:
+Kubernetes, Deployment, Probe, Monitoring
+
+Related Job Requirement:
+Kubernetes 운영 경험, 서비스 안정화 경험
+
+Related Cloud Native Korea Lab:
+Kubernetes Deployment / Service / readinessProbe / livenessProbe 실습
+
+Portfolio Evidence:
+mini-platform/k8s/deployment.yaml
+mini-platform/k8s/service.yaml
+GitHub Actions 배포 기록
+
+Interview Preparation Point:
+왜 readinessProbe와 livenessProbe가 필요한지 설명할 수 있어야 한다.
+```
+
+---
+
+## 5. Learning Roadmap Mapping
 
 이 공고를 준비하려면 어떤 순서로 공부해야 하는지 정리합니다.
 
@@ -71,7 +116,7 @@ CI/CD 도구로 테스트와 배포 과정을 자동화합니다.
 
 ---
 
-## 5. Portfolio Evidence
+## 6. Portfolio Evidence
 
 이 공고에 지원한다고 가정했을 때 GitHub에 남겨야 할 증거입니다.
 
@@ -86,13 +131,14 @@ CI/CD 도구로 테스트와 배포 과정을 자동화합니다.
 □ Docker 이미지 자동 빌드 기록
 □ GHCR 이미지 push 기록
 □ commit SHA 기반 이미지 배포 기록
+□ 기업 테크 노트와 연결되는 실습 기록
 □ 에러 해결 기록
 □ README에 아키텍처 설명
 ```
 
 ---
 
-## 6. Difficulty for Beginners
+## 7. Difficulty for Beginners
 
 ```text
 초보자 기준 난이도:
@@ -107,7 +153,7 @@ CI/CD 도구로 테스트와 배포 과정을 자동화합니다.
 
 ---
 
-## 7. Certification Connection
+## 8. Certification Connection
 
 이 공고와 연결되는 자격증을 정리합니다.
 
@@ -122,7 +168,7 @@ CI/CD 도구로 테스트와 배포 과정을 자동화합니다.
 
 ---
 
-## 8. Community Post Version
+## 9. Community Post Version
 
 ```text
 [오늘의 클라우드 네이티브 커리어]
@@ -130,6 +176,8 @@ CI/CD 도구로 테스트와 배포 과정을 자동화합니다.
 오늘 살펴본 직무:
 
 공고에서 자주 보인 기술:
+
+관련 기업 테크 노트:
 
 초보자용 쉬운 설명:
 
@@ -139,13 +187,15 @@ Cloud Native Korea Lab에서 연결되는 실습:
 
 GitHub 포트폴리오에 남기면 좋은 증거:
 
+면접 준비 포인트:
+
 오늘의 질문:
 여러분은 클라우드 네이티브 채용공고를 볼 때 어떤 기술 이름이 가장 어렵게 느껴지나요?
 ```
 
 ---
 
-## 9. Important Note
+## 10. Important Note
 
 채용공고는 수시로 변경되므로, 이 문서는 실시간 채용 데이터 저장소가 아닙니다.
-Cloud Native Korea Lab에서는 채용공고를 학습 방향과 포트폴리오 준비를 위한 참고 자료로 사용합니다.
+Cloud Native Korea Lab에서는 채용공고와 기업 테크 노트를 학습 방향, 면접 준비, 포트폴리오 준비를 위한 참고 자료로 사용합니다.
