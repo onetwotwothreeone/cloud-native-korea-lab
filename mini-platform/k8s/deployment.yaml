@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: fastapi-mini-platform
-          image: cnkl-fastapi-mini-platform:0.1.0
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           env:
