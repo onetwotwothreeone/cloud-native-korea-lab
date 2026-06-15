@@ -73,6 +73,15 @@ cloud-native-korea-lab
 ├── error-logs
 ├── notes
 ├── content
+├── career
+│   ├── README.md
+│   ├── jobs
+│   │   └── job-curation-template.md
+│   ├── certifications
+│   │   └── cloud-native-certification-roadmap.md
+│   ├── roles
+│   │   └── cloud-native-role-map.md
+│   └── portfolio-checklist.md
 ├── portfolio
 └── mini-platform
     ├── README.md
@@ -125,6 +134,7 @@ CI: GitHub Actions
 - GitHub Actions로 FastAPI 테스트 자동화
 - GitHub Actions로 Docker 이미지 빌드 자동화
 - 루트 README와 mini-platform README 최신화
+- Cloud Native Career Guide 문서 추가
 
 ---
 
@@ -145,6 +155,31 @@ CI: GitHub Actions
 13. Terraform
 14. Cloud Platform
 15. Official Docs-based RAG
+16. Cloud Native Career Guide
+
+---
+
+## Career Guide
+
+Cloud Native Korea Lab은 학습과 실습을 실제 커리어 준비와 연결합니다.
+
+커리어 가이드는 아래 흐름을 기준으로 운영합니다.
+
+```text
+채용공고 요구 기술
+→ 배워야 할 개념
+→ 해볼 실습
+→ GitHub 포트폴리오 증거
+→ 커뮤니티 설명 글
+```
+
+현재 추가된 문서는 다음과 같습니다.
+
+- `career/README.md` : 커리어 가이드 전체 개요
+- `career/jobs/job-curation-template.md` : 채용공고 큐레이션 템플릿
+- `career/certifications/cloud-native-certification-roadmap.md` : 자격증 로드맵
+- `career/roles/cloud-native-role-map.md` : 클라우드 네이티브 직무 지도
+- `career/portfolio-checklist.md` : 포트폴리오 점검표
 
 ---
 
@@ -175,6 +210,7 @@ push / pull_request
 7. 공식 문서 기반 RAG 구조 설계
 8. 실제 AI 응답 연결
 9. Cloud 배포 구조 설계
+10. Cloud Native Career Guide를 네이버 카페 콘텐츠와 연결
 
 ---
 
