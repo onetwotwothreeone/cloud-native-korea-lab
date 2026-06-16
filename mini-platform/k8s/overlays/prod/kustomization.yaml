@@ -11,3 +11,6 @@ labels:
 images:
   - name: ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform
     newTag: 2d2dd9c7850342517634879db4123e3106ede24b
+
+patches:
+  - path: deployment-patch.yaml
