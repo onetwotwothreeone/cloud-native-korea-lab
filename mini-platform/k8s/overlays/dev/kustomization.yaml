@@ -1,0 +1,9 @@
+resources:
+  - ../../base
+
+nameSuffix: -dev
+
+labels:
+  - pairs:
+      environment: dev
+    includeSelectors: true
