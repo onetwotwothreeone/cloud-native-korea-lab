@@ -1,9 +1,15 @@
 resources:
   - ../../base
 
+namespace: cnkl-dev
+
 nameSuffix: -dev
 
 labels:
   - pairs:
       environment: dev
     includeSelectors: true
+
+images:
+  - name: ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform
+    newTag: latest

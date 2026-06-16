@@ -1,6 +1,8 @@
 resources:
   - ../../base
 
+namespace: cnkl-prod
+
 nameSuffix: -prod
 
 labels:
