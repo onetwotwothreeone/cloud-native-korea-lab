@@ -39,6 +39,31 @@ Cloud Native Korea Lab의 새 통합 방향은 다음 질문에 답하는 것입
 
 ---
 
+## Top-down Completion Principle
+
+Cloud Native Korea Lab은 프로젝트 완성을 목표로 출발하는 Top-down 방식으로 진행합니다.
+
+먼저 완성해야 할 결과물을 정의하고, 그 결과물을 만들기 위해 필요한 기능, 기술, 실습, 문서를 역순으로 정리합니다.
+
+```text
+완성된 AI Evaluation Platform
+→ 필요한 MVP 기능
+→ 필요한 API와 데이터 모델
+→ 필요한 인프라와 자동화
+→ 필요한 클라우드 네이티브 실습
+→ 오늘 해야 할 작은 작업
+```
+
+따라서 Docker, Kubernetes, PostgreSQL, CI/CD, Helm, Argo CD, Monitoring, Terraform, Cloud는 따로따로 외우는 대상이 아니라, `ai-evaluation-platform` 완성에 필요한 도구로 학습합니다.
+
+모든 프로젝트 판단 기준은 다음 문장입니다.
+
+> 이 작업이 xAI 지원용 포트폴리오 완성 또는 실제 한국어 AI 평가 서비스화에 도움이 되는가?
+
+도움이 되면 진행하고, 도움이 약하면 보류합니다.
+
+---
+
 ## Current Core Projects
 
 ### 1. mini-platform
