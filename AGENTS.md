@@ -26,6 +26,31 @@ ai-evaluation-platform = flagship portfolio
 Do not treat `mini-platform` as the final product.
 Use it as a learning sandbox and apply the learned patterns to `ai-evaluation-platform`.
 
+## Top-down Completion Principle
+
+Cloud Native Korea Lab must be developed with a top-down mindset.
+
+Start from the finished project goal, then work backward to decide what to learn, build, document, and automate.
+
+```text
+Finished AI Evaluation Platform
+  -> required MVP features
+  -> required API and data model
+  -> required infrastructure
+  -> required cloud-native labs
+  -> daily implementation tasks
+```
+
+This means the project should not proceed by randomly studying tools.
+Docker, Kubernetes, PostgreSQL, CI/CD, Helm, Argo CD, Monitoring, Terraform, and Cloud should be learned only as they help complete the portfolio or real service.
+
+When deciding what to work on, always ask:
+
+> Does this move the project closer to a complete xAI-ready AI Evaluation Platform or future real Korean AI evaluation service?
+
+If yes, proceed.
+If no, postpone it.
+
 ## Main Priority
 
 When working in this repository, prioritize the following order:
