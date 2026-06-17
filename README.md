@@ -1,18 +1,51 @@
 # Cloud Native Korea Lab
 
-Cloud Native Korea Lab은 Python FastAPI 기반의 Cloud Native AI Docs Agent를 만들고, 이를 Docker, Docker Compose, Kubernetes, CI/CD, GitOps, Monitoring, Terraform, Cloud 배포까지 단계적으로 운영해보는 학습 Repository입니다.
+Cloud Native Korea Lab은 클라우드 네이티브 학습, FastAPI 실습, AI 데이터 평가 플랫폼 구축, 그리고 xAI 커리어 준비를 하나의 흐름으로 연결하는 학습형 포트폴리오 저장소입니다.
 
-목표는 클라우드 네이티브를 실습 중심으로 공부하면서, 초보자도 쉽게 따라올 수 있는 한국어 교육 콘텐츠와 커뮤니티 자료를 함께 만드는 것입니다.
+처음에는 Python FastAPI 기반의 Cloud Native AI Docs Agent를 만들고 Docker, Docker Compose, Kubernetes, CI/CD를 실습하는 저장소로 시작했습니다. 이제는 그 실습 경험을 바탕으로 `ai-evaluation-platform`이라는 대표 포트폴리오를 만들어 가는 방향으로 확장합니다.
+
+쉽게 말하면, 이 저장소의 방향은 다음과 같습니다.
+
+```text
+클라우드 네이티브 기초 실습
+→ FastAPI mini-platform으로 연습
+→ AI 데이터 평가 플랫폼 구축
+→ 한국어 AI 평가 서비스 가능성 검증
+→ xAI AI Tutor 및 Model team 준비
+```
 
 ---
 
-## 현재 핵심 프로젝트
+## Project Identity
 
-### FastAPI Mini Platform
+```text
+mini-platform = practice sandbox
+ai-evaluation-platform = flagship portfolio
+```
 
-현재 Mini Platform은 Python FastAPI 기반입니다.
+`mini-platform`은 최종 제품이 아니라 연습장입니다. FastAPI, Docker, Kubernetes, CI/CD 같은 기본기를 작게 실험하고 익히는 공간입니다.
 
-구현된 API는 다음과 같습니다.
+`ai-evaluation-platform`은 이 저장소의 대표 포트폴리오입니다. AI 학습 데이터, 어노테이션, 사람의 피드백, 품질 점수, 리뷰 워크플로우를 FastAPI, PostgreSQL, Docker, Kubernetes, GitHub Actions로 연결하는 것을 목표로 합니다.
+
+---
+
+## Main Direction
+
+Cloud Native Korea Lab의 새 통합 방향은 다음 질문에 답하는 것입니다.
+
+> 이 실습이 AI 데이터 평가, 클라우드 네이티브 인프라, xAI 준비에 어떤 증거가 되는가?
+
+기존 실습은 삭제하지 않습니다. 이미 완료한 실습들은 학습 기록이자 포트폴리오의 기반입니다. 앞으로는 그 기반 위에 `ai-evaluation-platform`을 중심 프로젝트로 쌓아 갑니다.
+
+---
+
+## Current Core Projects
+
+### 1. mini-platform
+
+`mini-platform`은 FastAPI와 클라우드 네이티브 배포 흐름을 연습하는 샌드박스입니다.
+
+현재 구현된 API는 다음과 같습니다.
 
 ```text
 GET  /
@@ -30,24 +63,37 @@ GET  /docs
 
 현재 `/ask`는 실제 AI/RAG를 연결하기 전 단계이며, 고정된 예시 응답을 반환합니다.
 
+### 2. ai-evaluation-platform
+
+`ai-evaluation-platform`은 이 저장소의 대표 포트폴리오입니다.
+
+목표는 AI 모델 학습과 개선에 필요한 평가 흐름을 작고 명확한 API 시스템으로 만드는 것입니다.
+
+초기 MVP는 다음 기능을 목표로 합니다.
+
+1. 평가 작업 생성
+2. 텍스트 또는 오디오 샘플 메타데이터 등록
+3. 어노테이션 제출
+4. 품질 점수 제출
+5. `review_required` 샘플 표시
+6. PostgreSQL에 평가 결과 저장
+7. FastAPI 엔드포인트 제공
+8. Docker Compose로 로컬 실행
+9. Kubernetes로 배포
+10. GitHub Actions로 테스트
+
+이 프로젝트는 단순한 CRUD 연습이 아니라, AI 데이터 품질과 사람의 피드백을 어떻게 구조화할 수 있는지 보여주는 포트폴리오입니다.
+
 ---
 
-## Project Identity
+## Strategy Documents
 
-```text
-클라우드 네이티브를 설명하는 AI를
-클라우드 네이티브 방식으로 운영한다.
-```
+새 방향은 아래 문서들에 정리되어 있습니다.
 
----
-
-## Operating Principle
-
-> 이 기술이 Mini Platform 완성에 어떤 역할을 하지?
-
-> 12살도 이해할 수 있을 만큼 쉽게 설명하되, 개념은 정확하게 설명한다.
-
-모든 기술 학습은 단순 개념 암기가 아니라, FastAPI Mini Platform을 실제 운영 가능한 Cloud Native AI Docs Agent로 발전시키는 흐름에 연결합니다.
+- [Integrated xAI Strategy](docs/career/integrated-xai-strategy.md)
+- [xAI Roadmap](docs/career/xai-roadmap.md)
+- [Portfolio First, Service Next](docs/career/portfolio-first-service-next.md)
+- [AI Evaluation Platform README](ai-evaluation-platform/README.md)
 
 ---
 
@@ -60,6 +106,13 @@ cloud-native-korea-lab
 ├── .github
 │   └── workflows
 │       └── fastapi-ci.yml
+├── docs
+│   └── career
+│       ├── integrated-xai-strategy.md
+│       ├── xai-roadmap.md
+│       └── portfolio-first-service-next.md
+├── ai-evaluation-platform
+│   └── README.md
 ├── roadmap
 ├── labs
 │   ├── week-01-linux-git
@@ -74,16 +127,6 @@ cloud-native-korea-lab
 ├── notes
 ├── content
 ├── career
-│   ├── README.md
-│   ├── jobs
-│   │   └── job-curation-template.md
-│   ├── tech-notes
-│   │   └── company-tech-note-template.md
-│   ├── certifications
-│   │   └── cloud-native-certification-roadmap.md
-│   ├── roles
-│   │   └── cloud-native-role-map.md
-│   └── portfolio-checklist.md
 ├── portfolio
 └── mini-platform
     ├── README.md
@@ -111,6 +154,7 @@ cloud-native-korea-lab
 Language: Python 3.13.13
 API Framework: FastAPI
 ASGI Server: Uvicorn
+Database: PostgreSQL for ai-evaluation-platform
 Test: pytest, httpx, FastAPI TestClient
 Container: Docker
 Local Container Orchestration: Docker Compose
@@ -143,6 +187,8 @@ CI: GitHub Actions
 
 ## Learning Direction
 
+학습 방향은 기존 클라우드 네이티브 기초를 유지하면서, AI 평가 플랫폼에 필요한 기술로 연결합니다.
+
 1. Linux & Git
 2. Network
 3. Python & FastAPI
@@ -151,78 +197,82 @@ CI: GitHub Actions
 6. Kubernetes
 7. Kubernetes Health Check
 8. CI/CD
-9. Kubernetes ConfigMap / Secret
-10. Helm
-11. Argo CD
-12. Monitoring
-13. Terraform
-14. Cloud Platform
-15. Official Docs-based RAG
-16. Cloud Native Career Guide
-17. Company Tech Notes Research
+9. PostgreSQL
+10. API design for evaluation workflows
+11. Kubernetes ConfigMap / Secret
+12. Helm
+13. Argo CD
+14. Monitoring
+15. Terraform
+16. Cloud Platform
+17. Official Docs-based RAG
+18. AI data evaluation and annotation workflow
+19. Korean voice/text evaluation portfolio
+20. Cloud Native Career Guide
+21. Company Tech Notes Research
 
 ---
 
-## Career Guide
+## Career and Portfolio Direction
 
 Cloud Native Korea Lab은 학습과 실습을 실제 커리어 준비와 연결합니다.
 
-커리어 가이드는 아래 흐름을 기준으로 운영합니다.
+목표 포지셔닝은 다음과 같습니다.
 
 ```text
-채용공고 요구 기술
-→ 기업 테크 노트의 실제 문제 해결 사례
-→ 배워야 할 개념
-→ 해볼 실습
-→ GitHub 포트폴리오 증거
-→ 커뮤니티 설명 글
+Korean AI Data & Evaluation Builder
+with Cloud Native Infrastructure Skills
 ```
 
-현재 추가된 문서는 다음과 같습니다.
+이 저장소는 다음 경험을 하나로 연결합니다.
 
-- `career/README.md` : 커리어 가이드 전체 개요
-- `career/jobs/job-curation-template.md` : 채용공고 큐레이션 템플릿
-- `career/tech-notes/company-tech-note-template.md` : 기업 테크 노트 분석 템플릿
-- `career/certifications/cloud-native-certification-roadmap.md` : 자격증 로드맵
-- `career/roles/cloud-native-role-map.md` : 클라우드 네이티브 직무 지도
-- `career/portfolio-checklist.md` : 포트폴리오 점검표
+- 한국어 튜터링 경험
+- 한국어 음성/텍스트 평가 역량
+- FastAPI 기반 API 설계
+- PostgreSQL 데이터 모델링
+- Docker와 Kubernetes 운영 실습
+- GitHub Actions 기반 CI/CD
+- AI 데이터 품질, 어노테이션, 사람의 피드백 이해
+- xAI AI Tutor 및 Model team 준비
 
 ---
 
 ## Current Focus
 
-현재 집중할 것은 GitHub Actions로 자동화된 테스트와 Docker 이미지 빌드 흐름을 안정적으로 기록하고, Kubernetes 운영 설정을 다음 단계로 확장하는 것입니다.
+현재 집중할 것은 `ai-evaluation-platform`을 작지만 완성도 있는 포트폴리오 MVP로 만드는 것입니다.
 
-현재 CI 흐름은 다음과 같습니다.
+우선순위는 다음과 같습니다.
 
-```text
-push / pull_request
-→ Python 3.13 설정
-→ requirements.txt 설치
-→ python -m pytest
-→ docker build
-```
+1. `ai-evaluation-platform`의 FastAPI MVP 만들기
+2. PostgreSQL 데이터 모델 추가하기
+3. Docker Compose로 로컬 실행 가능하게 만들기
+4. 테스트 추가하기
+5. Kubernetes manifest 작성하기
+6. GitHub Actions로 테스트 자동화하기
+7. README, 아키텍처 문서, 문제 정의 문서 정리하기
+
+`mini-platform`에서 배운 것은 버리지 않습니다. 대신 그 경험을 `ai-evaluation-platform`에 적용합니다.
 
 ---
 
 ## Next Steps
 
-1. GitHub Actions 실행 결과 확인 및 실습 기록 정리
-2. Kubernetes ConfigMap / Secret 적용
-3. Kubernetes manifest 개선
-4. Helm Chart 작성
-5. Argo CD GitOps 배포
-6. Prometheus / Grafana 모니터링 연결
-7. 공식 문서 기반 RAG 구조 설계
-8. 실제 AI 응답 연결
-9. Cloud 배포 구조 설계
-10. Cloud Native Career Guide를 네이버 카페 콘텐츠와 연결
-11. 기업 테크 노트와 채용공고를 함께 분석하는 주간 커리어 리서치 작성
+1. `ai-evaluation-platform` FastAPI 프로젝트 구조 만들기
+2. Task, Sample, Annotation, Evaluation 데이터 모델 설계
+3. `/health`, `/version`, `/tasks`, `/samples`, `/annotations`, `/evaluations`, `/reviews` API 초안 구현
+4. PostgreSQL 연결
+5. Docker Compose 실행 환경 추가
+6. pytest 기반 테스트 추가
+7. Kubernetes 배포 manifest 작성
+8. GitHub Actions CI 추가
+9. 영어 README와 아키텍처 문서 작성
+10. 한국어 음성/텍스트 평가 예시 데이터 준비
+11. 포트폴리오 먼저 완성한 뒤, 실제 한국어 AI 평가 서비스 가능성 검토
 
 ---
 
 ## Vision
 
-Cloud Native Korea Lab은 한국에서 가장 초보자 친화적인 클라우드 네이티브 학습 커뮤니티를 만드는 것을 목표로 합니다.
+Cloud Native Korea Lab은 초보자 친화적인 클라우드 네이티브 학습 기록에서 출발해, AI 데이터 평가와 사람의 피드백을 다루는 실전형 포트폴리오로 성장하는 프로젝트입니다.
 
-최종 목표는 공식 문서 기반 Cloud Native AI Docs Agent를 만들고, 그 에이전트를 실제 클라우드 네이티브 방식으로 운영하면서 교육 콘텐츠와 커뮤니티를 함께 성장시키는 것입니다.
+최종 목표는 단순히 실습을 많이 하는 것이 아닙니다. 클라우드 네이티브 방식으로 AI 평가 플랫폼을 만들고, 그 과정을 통해 기술력, 제품 사고, 운영 습관을 함께 증명하는 것입니다.
