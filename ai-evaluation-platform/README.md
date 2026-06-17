@@ -1,22 +1,62 @@
-# AI Evaluation Platform
+# Cloud Native AI Evaluation Platform
 
-## Project Role
+Cloud Native AI Evaluation Platform is the flagship portfolio project of Cloud Native Korea Lab.
 
-This is the flagship portfolio project of Cloud Native Korea Lab.
+The goal is to build a small cloud-native platform for AI data evaluation, annotation workflows, human feedback, quality scoring, and review management.
 
-The existing `mini-platform` is a practice sandbox.
-This `ai-evaluation-platform` is the main portfolio project.
+This project connects AI data quality, FastAPI API design, PostgreSQL, Docker, Kubernetes, GitHub Actions, and future real service development.
+
+---
+
+## Project Positioning
 
 ```text
 mini-platform = practice sandbox
 ai-evaluation-platform = flagship portfolio
 ```
 
-## Problem Definition
+The previous `mini-platform` was used to practice:
+
+- FastAPI basics
+- Docker
+- Docker Compose
+- Kubernetes
+- readinessProbe / livenessProbe
+- GitHub Actions
+- GHCR
+- Kustomize
+- dev/prod namespace separation
+
+This `ai-evaluation-platform` applies those learned patterns to a real portfolio project.
+
+---
+
+## Current Version
+
+```text
+v0.1.0
+```
+
+---
+
+## Current Features
+
+```text
+GET  /
+GET  /health
+GET  /version
+POST /tasks
+GET  /tasks
+GET  /docs
+```
+
+---
+
+## Why This Project Exists
 
 AI models improve when training data, annotations, and human feedback are high quality.
 
-However, evaluation workflows often have these problems:
+However, AI evaluation workflows often have these problems:
 
 - unclear quality criteria
 - inconsistent human judgments
@@ -25,130 +65,249 @@ However, evaluation workflows often have these problems:
 - evaluation results that are difficult to reuse
 - weak connection between human feedback and model improvement
 
-This project builds a small cloud-native platform to manage AI data evaluation workflows.
+This project starts by building a simple API system for managing evaluation tasks.
 
-## MVP Goal
+---
 
-Build a minimal but complete API system for evaluating AI training data and model outputs.
+## MVP Direction
 
-## MVP Features
+The final MVP will support the following workflow:
 
-1. Create evaluation tasks
-2. Register text or audio sample metadata
-3. Submit annotations
-4. Submit quality scores
-5. Mark samples as `review_required`
-6. Store evaluation results in PostgreSQL
-7. Expose FastAPI endpoints
-8. Run locally with Docker Compose
-9. Deploy to Kubernetes
-10. Test with GitHub Actions
+```text
+Create evaluation task
+→ Register sample
+→ Submit annotation
+→ Submit quality score
+→ Mark review_required
+→ Store results
+→ Export or review data
+```
 
-## Initial Scope
+---
 
-The first version focuses on text and metadata-based evaluation.
-Audio file handling can be added later.
+## Current Scope
 
-## Out of Scope for MVP
+This first version only includes an in-memory Task API.
 
-- user authentication
-- payment
-- complex frontend
-- large-scale model training
-- real user uploads
-- streaming audio processing
-- multi-tenant architecture
+PostgreSQL will be added in a later version.
 
-## Tech Stack
+---
 
-- Python
-- FastAPI
-- PostgreSQL
-- Docker
-- Docker Compose
-- Kubernetes
-- GitHub Actions
-- Kustomize later
-
-## Suggested Data Model
+## Data Model Draft
 
 ### Task
 
-- id
-- title
-- task_type: text / audio
-- language
-- status
-- created_at
+```text
+id
+title
+task_type: text / audio
+language
+status
+description
+created_at
+```
 
-### Sample
-
-- id
-- task_id
-- content
-- transcript
-- metadata
-- created_at
-
-### Annotation
-
-- id
-- sample_id
-- annotator
-- label
-- comment
-- ambiguity_flag
-- created_at
-
-### Evaluation
-
-- id
-- sample_id
-- clarity_score
-- naturalness_score
-- accuracy_score
-- context_score
-- quality_score
-- review_required
-- reason
-- created_at
-
-## API Draft
+### Future Models
 
 ```text
-GET  /health
-GET  /version
-POST /tasks
-GET  /tasks
-POST /samples
-GET  /samples/{sample_id}
-POST /annotations
-POST /evaluations
-GET  /reviews
+Sample
+Annotation
+Evaluation
+Review
 ```
+
+---
+
+## Tech Stack
+
+```text
+Language: Python
+API Framework: FastAPI
+Test Framework: pytest
+HTTP Test Client: FastAPI TestClient / httpx
+Future Database: PostgreSQL
+Future Container Runtime: Docker
+Future Orchestration: Kubernetes
+Future CI/CD: GitHub Actions
+```
+
+---
+
+## Project Structure
+
+```text
+ai-evaluation-platform
+├── README.md
+├── requirements.txt
+├── pytest.ini
+├── app
+│   ├── __init__.py
+│   └── main.py
+└── tests
+    └── test_main.py
+```
+
+---
+
+## Run Locally
+
+```bash
+cd ~/cloud-native-korea-lab/ai-evaluation-platform
+
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload --port 8010
+```
+
+Open API docs:
+
+```text
+http://localhost:8010/docs
+```
+
+---
+
+## Test
+
+```bash
+cd ~/cloud-native-korea-lab/ai-evaluation-platform
+
+python -m pytest
+```
+
+Expected result:
+
+```text
+4 passed
+```
+
+---
+
+## API Examples
+
+### Health Check
+
+```bash
+curl http://localhost:8010/health
+```
+
+Expected response:
+
+```json
+{
+  "status": "ok"
+}
+```
+
+### Version Check
+
+```bash
+curl http://localhost:8010/version
+```
+
+Expected response:
+
+```json
+{
+  "version": "0.1.0",
+  "project": "ai-evaluation-platform",
+  "framework": "FastAPI"
+}
+```
+
+### Create Task
+
+```bash
+curl -X POST http://localhost:8010/tasks \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Evaluate Korean AI Tutor response",
+    "task_type": "text",
+    "language": "ko",
+    "description": "Check clarity, accuracy, and naturalness."
+  }' | python3 -m json.tool
+```
+
+### List Tasks
+
+```bash
+curl http://localhost:8010/tasks | python3 -m json.tool
+```
+
+---
 
 ## Portfolio Message
 
-This project demonstrates the ability to connect AI data quality, human feedback, API design, database modeling, containerization, Kubernetes deployment, CI/CD, and technical documentation.
+This project demonstrates the ability to connect:
 
-## Long-term Service Direction
+- AI data quality
+- human feedback
+- annotation workflows
+- evaluation rubric design
+- FastAPI backend development
+- API testing
+- PostgreSQL data modeling
+- Docker containerization
+- Kubernetes deployment
+- CI/CD automation
+- technical documentation
 
-After the portfolio version is complete, this project can evolve into a real Korean AI data and model output evaluation service.
+---
 
-Potential service direction:
+## Long-Term Direction
+
+This project can later evolve into a real Korean AI evaluation service.
+
+Possible future service directions:
 
 - Korean LLM answer evaluation
 - Korean speech data quality review
-- AI tutor answer evaluation
+- AI tutor response evaluation
 - human feedback dataset management
 - CSV / JSON export for training data workflows
 
-## Current Priority
+---
 
-1. Build a simple FastAPI MVP
-2. Add PostgreSQL
-3. Add Docker Compose
-4. Add tests
-5. Add Kubernetes manifests
-6. Add GitHub Actions
-7. Write English README and architecture docs
+## Out of Scope for MVP
+
+The first MVP will not include:
+
+- login / signup
+- payment
+- complex frontend
+- real user uploads
+- private data handling
+- large-scale model training
+- streaming audio processing
+- multi-tenant architecture
+
+The goal is to build a small but complete portfolio first.
+
+---
+
+## Safety Rule
+
+Do not use private, confidential, or internal company data.
+
+Only use:
+
+- public data
+- synthetic data
+- self-created samples
+- properly anonymized examples
+- user-consented data
+
+---
+
+## Next Steps
+
+1. Add Sample API
+2. Add Annotation API
+3. Add Evaluation API
+4. Add `review_required` workflow
+5. Add PostgreSQL
+6. Add Dockerfile
+7. Add Docker Compose
+8. Add GitHub Actions CI
+9. Add Kubernetes manifests
+10. Write English portfolio README and architecture docs
