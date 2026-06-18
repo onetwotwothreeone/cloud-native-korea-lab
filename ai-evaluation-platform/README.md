@@ -47,6 +47,9 @@ GET  /health
 GET  /version
 POST /tasks
 GET  /tasks
+POST /samples
+GET  /samples
+GET  /samples/{sample_id}
 GET  /docs
 ```
 
@@ -87,7 +90,7 @@ Create evaluation task
 
 ## Current Scope
 
-This first version only includes an in-memory Task API.
+This version includes in-memory Task and Sample APIs.
 
 PostgreSQL will be added in a later version.
 
@@ -301,13 +304,12 @@ Only use:
 
 ## Next Steps
 
-1. Add Sample API
-2. Add Annotation API
-3. Add Evaluation API
-4. Add `review_required` workflow
-5. Add PostgreSQL
-6. Add Dockerfile
-7. Add Docker Compose
-8. Add GitHub Actions CI
-9. Add Kubernetes manifests
-10. Write English portfolio README and architecture docs
+1. Add Annotation API
+2. Add Evaluation API
+3. Add `review_required` workflow
+4. Add PostgreSQL
+5. Add Dockerfile
+6. Add Docker Compose
+7. Add GitHub Actions CI
+8. Add Kubernetes manifests
+9. Write English portfolio README and architecture docs
