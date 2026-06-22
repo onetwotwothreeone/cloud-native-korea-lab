@@ -1,0 +1,67 @@
+name: GWAN CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - "feature/**"
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gwan-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python tests and documentation checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.13"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Show environment
+        run: |
+          python --version
+          pip --version
+
+      - name: Run tests
+        env:
+          HYEAN_MEMORY_JSONL_PATH: /tmp/hyean-gwan-memory.jsonl
+          DATABASE_URL: sqlite+pysqlite:////tmp/hyean-gwan-ci.db
+        run: |
+          pytest -q
+
+      - name: Check required documentation files
+        run: |
+          test -f README.md
+          test -f docs/API_REFERENCE.md
+          test -f docs/LOCAL_RUNBOOK.md
+          test -f docs/18_GWAN_LongTermMemory_To_Onboard_Pull_And_Recommendation.md
+          test -f docs/19_GWAN_GitHub_Actions_CI.md

@@ -1,0 +1,7 @@
+{
+  "mission_id": "sim-custom-001",
+  "operator_intent": "regional_resource_scan",
+  "mission_phase": "regional_scan",
+  "priority_context": "prefer low-risk resource candidates while avoiding critical risk zones",
+  "observer": "onboard_gwan_core"
+}

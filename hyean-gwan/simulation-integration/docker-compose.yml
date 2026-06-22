@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: hyean-gwan-postgres
+    environment:
+      POSTGRES_USER: hyean
+      POSTGRES_PASSWORD: hyean_password
+      POSTGRES_DB: hyean_gwan
+    ports:
+      - "55432:5432"
+    volumes:
+      - hyean_gwan_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hyean -d hyean_gwan"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  hyean_gwan_postgres_data:

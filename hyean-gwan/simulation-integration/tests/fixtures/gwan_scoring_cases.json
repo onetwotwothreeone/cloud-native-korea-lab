@@ -1,0 +1,71 @@
+[
+  {
+    "case_id": "case-001-low-risk-resource",
+    "object_id": "candidate-resource-stable-001",
+    "description": "High-value resource candidate with low risk and low uncertainty.",
+    "display_category": "resource_candidate",
+    "confidence_label": "likely",
+    "data_classification": "estimated",
+    "scoring_inputs": {
+      "energy_score": 0.42,
+      "resource_score": 0.82,
+      "risk_score": 0.21,
+      "exploration_value_score": 0.78,
+      "uncertainty_score": 0.24
+    },
+    "expected_action": "send_micro_probe",
+    "expected_alert": "info"
+  },
+  {
+    "case_id": "case-002-high-risk-zone",
+    "object_id": "risk-radiation-critical-001",
+    "description": "Dangerous region with high risk score.",
+    "display_category": "risk_zone",
+    "confidence_label": "likely",
+    "data_classification": "simulated",
+    "scoring_inputs": {
+      "energy_score": 0.05,
+      "resource_score": 0.04,
+      "risk_score": 0.91,
+      "exploration_value_score": 0.18,
+      "uncertainty_score": 0.29
+    },
+    "expected_action": "avoid",
+    "expected_alert": "critical"
+  },
+  {
+    "case_id": "case-003-weak-spectral-signal",
+    "object_id": "candidate-ice-weak-signal-001",
+    "description": "Possible icy target, but spectral signal is weak and uncertainty is high.",
+    "display_category": "resource_candidate",
+    "confidence_label": "uncertain",
+    "data_classification": "hypothesis",
+    "scoring_inputs": {
+      "energy_score": 0.31,
+      "resource_score": 0.68,
+      "risk_score": 0.27,
+      "exploration_value_score": 0.74,
+      "uncertainty_score": 0.72
+    },
+    "uncertainty_type": "weak_signal",
+    "expected_action": "observe_more",
+    "expected_alert": "medium"
+  },
+  {
+    "case_id": "case-004-navigation-reference",
+    "object_id": "nav-reference-stable-001",
+    "description": "Known navigation reference with low uncertainty.",
+    "display_category": "navigation_reference",
+    "confidence_label": "confirmed",
+    "data_classification": "known",
+    "scoring_inputs": {
+      "energy_score": 0.10,
+      "resource_score": 0.02,
+      "risk_score": 0.08,
+      "exploration_value_score": 0.35,
+      "uncertainty_score": 0.05
+    },
+    "expected_action": "update_survival_map",
+    "expected_alert": "none"
+  }
+]
