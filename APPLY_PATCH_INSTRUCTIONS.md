@@ -1,14 +1,14 @@
-# Apply 20_GWAN_Docker_Image_Build_CI patch
+# Apply 21_GWAN_Docker_Compose_CI patch
 
 Apply this patch from the repository root:
 
 ```bash
 cd ~/Downloads
-unzip hyean_gwan_docker_image_build_ci_patch_2026-06-22.zip
+unzip hyean_gwan_docker_compose_ci_patch_2026-06-23.zip
 
 cd ~/cloud-native-korea-lab
-rsync -av ~/Downloads/hyean_gwan_docker_ci_patch/ ./
-cat ~/Downloads/hyean_gwan_docker_ci_patch/README_20_APPEND.md >> hyean-gwan/simulation-integration/README.md
+rsync -av ~/Downloads/hyean_gwan_docker_compose_ci_patch/ ./
+cat ~/Downloads/hyean_gwan_docker_compose_ci_patch/README_21_APPEND.md >> hyean-gwan/simulation-integration/README.md
 ```
 
 Run local tests:
@@ -16,14 +16,16 @@ Run local tests:
 ```bash
 cd ~/cloud-native-korea-lab/hyean-gwan/simulation-integration
 source .venv/bin/activate
-pytest -q
+python -m pytest -q
 ```
 
-Optional local Docker check:
+Optional local Docker Compose check:
 
 ```bash
-docker build -t hyean-gwan-simulation:local .
-docker run --rm -p 8000:8000 hyean-gwan-simulation:local
+docker compose -f docker-compose.ci.yml up -d --build
+curl -f http://127.0.0.1:8000/health
+curl -f http://127.0.0.1:8000/gwan/memory/db-status
+docker compose -f docker-compose.ci.yml down -v --remove-orphans
 ```
 
 Commit from repository root:
@@ -32,7 +34,7 @@ Commit from repository root:
 cd ~/cloud-native-korea-lab
 git status
 git add .
-git commit -m "Add GWAN Docker image build CI"
+git commit -m "Add GWAN Docker Compose CI"
 git push
 ```
 

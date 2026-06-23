@@ -12,8 +12,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  test-and-build:
-    name: Test and Docker build
+  test-build-and-compose:
+    name: Test, Docker build, and Compose integration
     runs-on: ubuntu-latest
 
     defaults:
@@ -51,6 +51,7 @@ jobs:
           test -f docs/18_GWAN_LongTermMemory_To_Onboard_Pull_And_Recommendation.md
           test -f docs/19_GWAN_GitHub_Actions_CI.md
           test -f docs/20_GWAN_Docker_Image_Build_CI.md
+          test -f docs/21_GWAN_Docker_Compose_CI.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -65,3 +66,23 @@ jobs:
           curl -f http://127.0.0.1:8000/health
           docker logs hyean-gwan-ci
           docker rm -f hyean-gwan-ci
+
+      - name: Docker Compose integration test
+        run: |
+          docker compose -f docker-compose.ci.yml up -d --build
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:8000/health; then
+              echo "API is ready"
+              break
+            fi
+            echo "Waiting for API... attempt $i"
+            sleep 2
+          done
+          curl -f http://127.0.0.1:8000/health
+          curl -f http://127.0.0.1:8000/gwan/memory/db-status
+          docker compose -f docker-compose.ci.yml logs api
+          docker compose -f docker-compose.ci.yml logs postgres
+
+      - name: Clean up Docker Compose
+        if: always()
+        run: docker compose -f docker-compose.ci.yml down -v --remove-orphans
