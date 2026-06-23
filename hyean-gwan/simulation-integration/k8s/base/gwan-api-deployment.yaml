@@ -47,6 +47,11 @@ spec:
                 configMapKeyRef:
                   name: gwan-api-config
                   key: DATABASE_USER
+            - name: HYEAN_MEMORY_JSONL_PATH
+              valueFrom:
+                configMapKeyRef:
+                  name: gwan-api-config
+                  key: HYEAN_MEMORY_JSONL_PATH
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -54,11 +59,12 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: DATABASE_URL
               value: postgresql+psycopg://$(DATABASE_USER):$(POSTGRES_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/$(DATABASE_NAME)
-            - name: HYEAN_MEMORY_JSONL_PATH
-              valueFrom:
-                configMapKeyRef:
-                  name: gwan-api-config
-                  key: HYEAN_MEMORY_JSONL_PATH
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            failureThreshold: 30
+            periodSeconds: 2
           readinessProbe:
             httpGet:
               path: /health
