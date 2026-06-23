@@ -919,3 +919,26 @@ scripts/k8s/metrics_server_check.sh
 ```bash
 python -m pytest -q
 ```
+
+## 34. GWAN Kubernetes HPA Behavior Policy
+
+This step adds controlled HPA scaling behavior for the GWAN API.
+
+The HPA now defines:
+
+- scaleUp behavior
+- scaleDown behavior
+- stabilization windows
+- Pod-based scaling policies
+
+This prevents the GWAN API from scaling too aggressively.
+
+Check commands:
+
+cd ~/cloud-native-korea-lab/hyean-gwan/simulation-integration
+
+kubectl apply -k k8s/overlays/local
+scripts/k8s/rollout_check.sh
+scripts/k8s/hpa_check.sh
+scripts/k8s/hpa_behavior_check.sh
+
