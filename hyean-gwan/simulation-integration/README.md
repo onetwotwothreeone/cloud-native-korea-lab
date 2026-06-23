@@ -555,3 +555,71 @@ curl http://127.0.0.1:8000/health
 ```
 
 This step begins the Kubernetes path after Docker image build, Docker Compose CI, and GHCR image push.
+
+## 24. GWAN Kubernetes local run
+
+This step adds a local Kubernetes runbook and helper scripts for the GWAN API and PostgreSQL manifests.
+
+Manual check:
+
+```bash
+cd hyean-gwan/simulation-integration
+kubectl kustomize k8s/base
+kubectl apply -k k8s/base
+kubectl -n hyean-gwan rollout status deployment/postgres --timeout=180s
+kubectl -n hyean-gwan rollout status deployment/gwan-api --timeout=180s
+kubectl -n hyean-gwan port-forward svc/gwan-api 8000:8000
+```
+
+In another terminal:
+
+```bash
+curl -f http://127.0.0.1:8000/health
+curl -f http://127.0.0.1:8000/gwan/memory/db-status
+```
+
+Scripted check:
+
+```bash
+scripts/k8s/apply_local.sh
+scripts/k8s/status.sh
+scripts/k8s/port_forward_health_check.sh
+scripts/k8s/cleanup_local.sh
+```
+
+## 25. GWAN Kubernetes overlays: local and production
+
+This step separates Kubernetes configuration by environment.
+
+```text
+k8s/base
+k8s/overlays/local
+k8s/overlays/production
+```
+
+Local Docker Desktop Kubernetes should use the local overlay:
+
+```bash
+docker build -t ghcr.io/onetwotwothreeone/hyean-gwan-simulation:latest .
+kubectl apply -k k8s/overlays/local
+```
+
+The local overlay sets:
+
+```text
+imagePullPolicy: Never
+```
+
+Production-like deployment should use the production overlay:
+
+```bash
+kubectl apply -k k8s/overlays/production
+```
+
+The production overlay keeps:
+
+```text
+imagePullPolicy: IfNotPresent
+```
+
+This prevents local-only image settings from leaking into production-like manifests.
