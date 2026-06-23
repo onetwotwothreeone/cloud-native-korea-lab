@@ -4,3 +4,4 @@ resources:
   - ../../base
 patches:
   - path: gwan-api-image-pull-policy-patch.yaml
+  - path: gwan-api-image-pull-secret-patch.yaml
