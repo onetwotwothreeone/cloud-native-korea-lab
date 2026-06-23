@@ -38,7 +38,10 @@ def test_gwan_api_deployment_uses_ghcr_image_and_database_url() -> None:
 
     assert "ghcr.io/onetwotwothreeone/hyean-gwan-simulation:latest" in text
     assert "DATABASE_URL" in text
-    assert "postgres:5432" in text
+    assert "DATABASE_URL" in text
+    assert "DATABASE_HOST" in text
+    assert "DATABASE_PORT" in text
+    assert "$(DATABASE_HOST):$(DATABASE_PORT)" in text
     assert "HYEAN_MEMORY_JSONL_PATH" in text
     assert "/health" in text
     assert "readinessProbe" in text

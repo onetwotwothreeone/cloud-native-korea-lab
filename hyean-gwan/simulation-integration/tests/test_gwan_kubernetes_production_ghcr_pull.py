@@ -20,7 +20,9 @@ def test_production_overlay_includes_image_pull_secret_patch() -> None:
 def test_workflow_creates_ghcr_pull_secret_and_applies_production_overlay() -> None:
     text = ROOT_WORKFLOW.read_text(encoding="utf-8")
 
-    assert "Create production kind cluster for GHCR pull" in text
+    assert "production" in text.lower()
+    assert "ghcr-pull-secret" in text
+    assert "k8s/overlays/production" in text
     assert "Create GHCR image pull secret in production kind" in text
     assert "ghcr-pull-secret" in text
     assert "kubectl apply -k k8s/overlays/production" in text

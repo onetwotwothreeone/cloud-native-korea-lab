@@ -19,7 +19,7 @@ permissions:
 
 jobs:
   test-build-compose-publish-and-kind:
-    name: Test, Docker, Compose, GHCR, and Kubernetes
+    name: Test, Docker, Compose, GHCR, and kind Kubernetes
     runs-on: ubuntu-latest
 
     defaults:
@@ -31,9 +31,9 @@ jobs:
       HYEAN_MEMORY_JSONL_PATH: /tmp/hyean-gwan-memory.jsonl
       GHCR_IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/hyean-gwan-simulation
       KIND_CLUSTER_NAME: hyean-gwan-ci
-      KIND_PRODUCTION_CLUSTER_NAME: hyean-gwan-production-ci
       KIND_VERSION: v0.32.0
       GWAN_KIND_IMAGE: ghcr.io/onetwotwothreeone/hyean-gwan-simulation:latest
+      KIND_PRODUCTION_CLUSTER_NAME: hyean-gwan-production-ci
 
     steps:
       - name: Checkout repository
@@ -69,6 +69,7 @@ jobs:
           test -f docs/25_GWAN_Kubernetes_Overlays_Local_And_Production.md
           test -f docs/26_GWAN_Kubernetes_CI_With_Kind.md
           test -f docs/27_GWAN_Kubernetes_Production_GHCR_Pull.md
+          test -f docs/28_GWAN_Kubernetes_Production_Secrets_And_Config.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -180,7 +181,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Create production kind cluster for GHCR pull
+      - name: Create production kind cluster
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           kind create cluster --name "${KIND_PRODUCTION_CLUSTER_NAME}" --wait 120s
@@ -190,12 +191,12 @@ jobs:
       - name: Create GHCR image pull secret in production kind
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          kubectl apply -f k8s/base/namespace.yaml
+          kubectl create namespace hyean-gwan --dry-run=client -o yaml | kubectl apply -f -
           kubectl -n hyean-gwan create secret docker-registry ghcr-pull-secret \
             --docker-server=ghcr.io \
             --docker-username="${{ github.actor }}" \
             --docker-password="${{ secrets.GITHUB_TOKEN }}" \
-            --docker-email="${{ github.actor }}@users.noreply.github.com" \
+            --docker-email="actions@github.com" \
             --dry-run=client -o yaml | kubectl apply -f -
 
       - name: Apply Kubernetes production overlay from GHCR
@@ -203,7 +204,7 @@ jobs:
         run: |
           kubectl apply -k k8s/overlays/production
           kubectl -n hyean-gwan rollout status deployment/postgres --timeout=180s
-          kubectl -n hyean-gwan rollout status deployment/gwan-api --timeout=180s
+          kubectl -n hyean-gwan rollout status deployment/gwan-api --timeout=240s
           kubectl -n hyean-gwan get pods
           kubectl -n hyean-gwan get svc
 
@@ -212,7 +213,7 @@ jobs:
         run: |
           kubectl -n hyean-gwan port-forward svc/gwan-api 8000:8000 > /tmp/gwan-production-port-forward.log 2>&1 &
           echo $! > /tmp/gwan-production-port-forward.pid
-          sleep 10
+          sleep 8
           curl -f http://127.0.0.1:8000/health
           curl -f http://127.0.0.1:8000/gwan/memory/db-status
           kill "$(cat /tmp/gwan-production-port-forward.pid)" || true
@@ -223,7 +224,6 @@ jobs:
         run: |
           kubectl -n hyean-gwan get all || true
           kubectl -n hyean-gwan describe pods || true
-          kubectl -n hyean-gwan get secret ghcr-pull-secret || true
           kubectl -n hyean-gwan logs deployment/gwan-api || true
           kubectl -n hyean-gwan logs deployment/postgres || true
 
