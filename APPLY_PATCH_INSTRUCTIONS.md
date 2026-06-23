@@ -1,14 +1,14 @@
-# Apply 30_GWAN_Kubernetes_Resource_Requests_And_Limits patch
+# Apply 31_GWAN_Kubernetes_Namespace_ResourceQuota_And_LimitRange
 
-Run from your Mac terminal:
+Run from your repository root.
 
 ```bash
 cd ~/Downloads
-unzip hyean_gwan_kubernetes_resources_patch_2026-06-23.zip
+unzip hyean_gwan_kubernetes_namespace_policy_patch_2026-06-23.zip
 
 cd ~/cloud-native-korea-lab
-rsync -av ~/Downloads/hyean_gwan_kubernetes_resources_patch/ ./
-cat ~/Downloads/hyean_gwan_kubernetes_resources_patch/README_30_APPEND.md >> hyean-gwan/simulation-integration/README.md
+rsync -av ~/Downloads/hyean_gwan_kubernetes_namespace_policy_patch/ ./
+cat ~/Downloads/hyean_gwan_kubernetes_namespace_policy_patch/README_31_APPEND.md >> hyean-gwan/simulation-integration/README.md
 ```
 
 Then test:
@@ -19,13 +19,13 @@ source .venv/bin/activate
 python -m pytest -q
 ```
 
-Optional local Kubernetes check:
+Then apply locally:
 
 ```bash
 docker build -t ghcr.io/onetwotwothreeone/hyean-gwan-simulation:latest .
 kubectl apply -k k8s/overlays/local
 scripts/k8s/rollout_check.sh
-scripts/k8s/resource_check.sh
+scripts/k8s/namespace_policy_check.sh
 ```
 
 Commit:
@@ -34,6 +34,6 @@ Commit:
 cd ~/cloud-native-korea-lab
 git status
 git add .
-git commit -m "Add GWAN Kubernetes resource requests and limits"
+git commit -m "Add GWAN Kubernetes namespace resource policies"
 git push
 ```

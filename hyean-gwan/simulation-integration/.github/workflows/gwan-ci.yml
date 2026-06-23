@@ -72,6 +72,7 @@ jobs:
           test -f docs/28_GWAN_Kubernetes_Production_Secrets_And_Config.md
           test -f docs/29_GWAN_Kubernetes_Health_Readiness_And_Observability_Baseline.md
           test -f docs/30_GWAN_Kubernetes_Resource_Requests_And_Limits.md
+          test -f docs/31_GWAN_Kubernetes_Namespace_ResourceQuota_And_LimitRange.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -132,6 +133,9 @@ jobs:
           kubectl -n hyean-gwan rollout status deployment/gwan-api --timeout=180s
           kubectl -n hyean-gwan get pods
           kubectl -n hyean-gwan get svc
+
+      - name: Kubernetes namespace policy check
+        run: scripts/k8s/namespace_policy_check.sh
 
       - name: Kubernetes API health check through port-forward
         run: |
@@ -209,6 +213,10 @@ jobs:
           kubectl -n hyean-gwan rollout status deployment/gwan-api --timeout=240s
           kubectl -n hyean-gwan get pods
           kubectl -n hyean-gwan get svc
+
+      - name: Production namespace policy check
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: scripts/k8s/namespace_policy_check.sh
 
       - name: Production overlay health check through port-forward
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
