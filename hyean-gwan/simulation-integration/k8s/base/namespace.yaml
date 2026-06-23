@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hyean-gwan
+  labels:
+    app.kubernetes.io/name: hyean-gwan
+    app.kubernetes.io/part-of: hyean
