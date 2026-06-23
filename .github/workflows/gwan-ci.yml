@@ -73,6 +73,7 @@ jobs:
           test -f docs/29_GWAN_Kubernetes_Health_Readiness_And_Observability_Baseline.md
           test -f docs/30_GWAN_Kubernetes_Resource_Requests_And_Limits.md
           test -f docs/31_GWAN_Kubernetes_Namespace_ResourceQuota_And_LimitRange.md
+          test -f docs/32_GWAN_Kubernetes_HPA_Autoscaling_Baseline.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -136,6 +137,9 @@ jobs:
 
       - name: Kubernetes namespace policy check
         run: scripts/k8s/namespace_policy_check.sh
+
+      - name: Kubernetes HPA check
+        run: bash scripts/k8s/hpa_check.sh
 
       - name: Kubernetes API health check through port-forward
         run: |

@@ -851,3 +851,25 @@ Simple meaning:
 ResourceQuota = total resource fence for the namespace
 LimitRange = default resource rule for containers
 ```
+## 32. GWAN Kubernetes HPA Autoscaling Baseline
+
+This step adds a baseline HorizontalPodAutoscaler for the GWAN API Deployment.
+
+The HPA targets `deployment/gwan-api` and uses:
+
+```text
+minReplicas: 1
+maxReplicas: 3
+CPU averageUtilization: 70
+```
+
+Local check:
+
+```bash
+docker build -t ghcr.io/onetwotwothreeone/hyean-gwan-simulation:latest .
+kubectl apply -k k8s/overlays/local
+scripts/k8s/rollout_check.sh
+scripts/k8s/hpa_check.sh
+```
+
+Note: local Docker Desktop or kind clusters may show HPA CPU metrics as `<unknown>` unless metrics-server is installed. This step focuses on adding and validating the HPA object.
