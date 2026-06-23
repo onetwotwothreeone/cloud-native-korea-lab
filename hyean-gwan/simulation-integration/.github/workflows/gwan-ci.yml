@@ -18,8 +18,8 @@ permissions:
   packages: write
 
 jobs:
-  test-build-compose-and-publish:
-    name: Test, build, Compose, and publish image
+  test-build-compose-publish-and-kind:
+    name: Test, Docker, Compose, GHCR, and kind Kubernetes
     runs-on: ubuntu-latest
 
     defaults:
@@ -30,6 +30,9 @@ jobs:
       DATABASE_URL: sqlite+pysqlite:////tmp/hyean-gwan-ci.db
       HYEAN_MEMORY_JSONL_PATH: /tmp/hyean-gwan-memory.jsonl
       GHCR_IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/hyean-gwan-simulation
+      KIND_CLUSTER_NAME: hyean-gwan-ci
+      KIND_VERSION: v0.32.0
+      GWAN_KIND_IMAGE: ghcr.io/onetwotwothreeone/hyean-gwan-simulation:latest
 
     steps:
       - name: Checkout repository
@@ -60,6 +63,10 @@ jobs:
           test -f docs/20_GWAN_Docker_Image_Build_CI.md
           test -f docs/21_GWAN_Docker_Compose_CI.md
           test -f docs/22_GWAN_GHCR_Image_Push.md
+          test -f docs/23_GWAN_Kubernetes_Manifests.md
+          test -f docs/24_GWAN_Kubernetes_Local_Run.md
+          test -f docs/25_GWAN_Kubernetes_Overlays_Local_And_Production.md
+          test -f docs/26_GWAN_Kubernetes_CI_With_Kind.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -94,6 +101,54 @@ jobs:
       - name: Clean up Docker Compose
         if: always()
         run: docker compose -f docker-compose.ci.yml down -v --remove-orphans
+
+      - name: Install kind
+        run: |
+          curl -Lo ./kind "https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64"
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
+          kind version
+
+      - name: Create kind cluster
+        run: |
+          kind create cluster --name "${KIND_CLUSTER_NAME}" --wait 120s
+          kubectl cluster-info --context "kind-${KIND_CLUSTER_NAME}"
+          kubectl get nodes
+
+      - name: Build and load image into kind
+        run: |
+          docker build -t "${GWAN_KIND_IMAGE}" .
+          kind load docker-image "${GWAN_KIND_IMAGE}" --name "${KIND_CLUSTER_NAME}"
+
+      - name: Apply Kubernetes local overlay in kind
+        run: |
+          kubectl apply -k k8s/overlays/local
+          kubectl -n hyean-gwan rollout status deployment/postgres --timeout=180s
+          kubectl -n hyean-gwan rollout status deployment/gwan-api --timeout=180s
+          kubectl -n hyean-gwan get pods
+          kubectl -n hyean-gwan get svc
+
+      - name: Kubernetes API health check through port-forward
+        run: |
+          kubectl -n hyean-gwan port-forward svc/gwan-api 8000:8000 > /tmp/gwan-kind-port-forward.log 2>&1 &
+          echo $! > /tmp/gwan-kind-port-forward.pid
+          sleep 8
+          curl -f http://127.0.0.1:8000/health
+          curl -f http://127.0.0.1:8000/gwan/memory/db-status
+          kill "$(cat /tmp/gwan-kind-port-forward.pid)" || true
+          cat /tmp/gwan-kind-port-forward.log
+
+      - name: Dump Kubernetes diagnostics
+        if: always()
+        run: |
+          kubectl -n hyean-gwan get all || true
+          kubectl -n hyean-gwan describe pods || true
+          kubectl -n hyean-gwan logs deployment/gwan-api || true
+          kubectl -n hyean-gwan logs deployment/postgres || true
+
+      - name: Delete kind cluster
+        if: always()
+        run: kind delete cluster --name "${KIND_CLUSTER_NAME}"
 
       - name: Log in to GitHub Container Registry
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
