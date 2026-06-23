@@ -70,6 +70,8 @@ jobs:
           test -f docs/26_GWAN_Kubernetes_CI_With_Kind.md
           test -f docs/27_GWAN_Kubernetes_Production_GHCR_Pull.md
           test -f docs/28_GWAN_Kubernetes_Production_Secrets_And_Config.md
+          test -f docs/29_GWAN_Kubernetes_Health_Readiness_And_Observability_Baseline.md
+          test -f docs/30_GWAN_Kubernetes_Resource_Requests_And_Limits.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
