@@ -1037,3 +1037,26 @@ kubectl apply -k k8s/overlays/local
 scripts/k8s/rollout_check.sh
 scripts/k8s/network_policy_check.sh
 
+## 37. GWAN Kubernetes ServiceAccount RBAC Baseline
+
+This step adds dedicated Kubernetes ServiceAccounts and minimal RBAC baseline for GWAN.
+
+ServiceAccount is the workload identity.
+RBAC is the permission rule.
+
+For HYEAN/GWAN, RBAC is preventive identity control.
+
+Baseline:
+
+- GWAN API uses gwan-api-sa.
+- PostgreSQL uses gwan-postgres-sa.
+- ServiceAccount token automount is false.
+- Minimal Roles have no Kubernetes API permissions.
+
+Check commands:
+
+cd ~/cloud-native-korea-lab/hyean-gwan/simulation-integration
+kubectl apply -k k8s/overlays/local
+scripts/k8s/rollout_check.sh
+scripts/k8s/rbac_check.sh
+

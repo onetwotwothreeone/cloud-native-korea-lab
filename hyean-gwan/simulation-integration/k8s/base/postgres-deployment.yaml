@@ -19,6 +19,8 @@ spec:
         app.kubernetes.io/part-of: hyean
         app.kubernetes.io/component: database
     spec:
+      serviceAccountName: gwan-postgres-sa
+      automountServiceAccountToken: false
       containers:
         - name: postgres
           image: postgres:16-alpine
