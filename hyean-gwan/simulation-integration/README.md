@@ -1086,3 +1086,35 @@ kubectl apply -k k8s/overlays/local
 scripts/k8s/rollout_check.sh
 scripts/k8s/security_context_check.sh
 
+
+## 39. GWAN Kubernetes Config and Secret Refinement
+
+This step separates normal runtime configuration from sensitive credentials.
+
+ConfigMap stores non-sensitive values:
+
+- DATABASE_HOST
+- DATABASE_PORT
+- DATABASE_NAME
+- DATABASE_DIALECT
+- HYEAN_MEMORY_JSONL_PATH
+
+Secret stores sensitive PostgreSQL credentials:
+
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+- POSTGRES_DB
+
+This keeps GWAN easier to move across local, staging, and production environments.
+
+Local check:
+
+```bash
+scripts/k8s/config_secret_check.sh
+```
+
+Next step:
+
+```text
+40_GWAN_Kubernetes_PersistentVolume_Baseline
+```

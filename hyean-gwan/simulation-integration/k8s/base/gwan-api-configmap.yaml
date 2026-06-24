@@ -5,11 +5,12 @@ metadata:
   namespace: hyean-gwan
   labels:
     app.kubernetes.io/name: gwan-api
+    app.kubernetes.io/component: api
     app.kubernetes.io/part-of: hyean
-    app.kubernetes.io/component: api-config
 data:
   DATABASE_HOST: postgres
   DATABASE_PORT: "5432"
   DATABASE_NAME: hyean_gwan
+  DATABASE_DIALECT: postgresql
   DATABASE_USER: hyean
   HYEAN_MEMORY_JSONL_PATH: /tmp/hyean-gwan-memory.jsonl
