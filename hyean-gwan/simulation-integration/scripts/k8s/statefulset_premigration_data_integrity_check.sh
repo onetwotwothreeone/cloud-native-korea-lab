@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Safety status constants for pre-migration data integrity review
+CURRENT_DECISION=NO_GO
+APPROVED_BY_OPERATOR=false
+FINAL_DECISION=NO_GO
+DATA_INTEGRITY_STATUS=REVIEW_ONLY
+READ_ONLY_CHECK=true
+REAL_MIGRATION_EXECUTED=false
+SECRET_VALUES_EXPORTED=false
+
 
 NAMESPACE="${NAMESPACE:-hyean-gwan}"
 BACKUP_DIR="${BACKUP_DIR:-.local/postgres-backups}"
