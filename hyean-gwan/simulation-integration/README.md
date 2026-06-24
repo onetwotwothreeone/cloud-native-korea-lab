@@ -1388,3 +1388,16 @@ No real StatefulSet migration is executed in this step.
 Next step:
 
 53_GWAN_Kubernetes_StatefulSet_Operator_Approval_Template
+
+## 55_GWAN_Kubernetes_StatefulSet_Final_Approval_Review
+
+This step adds the final approval review before any real PostgreSQL StatefulSet migration.
+
+Safety rule:
+
+- Do not execute real migration in this step.
+- Keep CURRENT_DECISION=NO_GO.
+- Keep APPROVED_BY_OPERATOR=false.
+- Keep FINAL_DECISION=NO_GO.
+- Confirm that operator approval and required documents are still required.
+
