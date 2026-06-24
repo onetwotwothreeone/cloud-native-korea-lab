@@ -8,6 +8,7 @@ resources:
   - gwan-api-pdb.yaml
   - namespace.yaml
   - postgres-secret.yaml
+- postgres-pvc.yaml
   - gwan-api-configmap.yaml
   - resourcequota.yaml
   - limitrange.yaml

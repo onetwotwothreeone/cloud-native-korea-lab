@@ -1118,3 +1118,27 @@ Next step:
 ```text
 40_GWAN_Kubernetes_PersistentVolume_Baseline
 ```
+
+---
+
+## 40_GWAN_Kubernetes_Persistence_Baseline
+
+GWAN PostgreSQL now has a Kubernetes persistence baseline.
+
+This step changes PostgreSQL storage from temporary emptyDir storage to a PersistentVolumeClaim.
+
+Key files:
+
+- k8s/base/postgres-pvc.yaml
+- k8s/base/postgres-deployment.yaml
+- scripts/k8s/persistence_check.sh
+- docs/40_GWAN_Kubernetes_Persistence_Baseline.md
+
+Check commands:
+
+kubectl -n hyean-gwan get pvc
+scripts/k8s/persistence_check.sh
+
+Next step:
+
+41_GWAN_Kubernetes_StatefulSet_Design_Review
