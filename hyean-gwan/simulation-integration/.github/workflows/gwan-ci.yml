@@ -77,6 +77,7 @@ jobs:
           test -f docs/33_GWAN_Kubernetes_Metrics_Server_And_HPA_Readiness.md
           test -f docs/34_GWAN_Kubernetes_HPA_Behavior_Policy.md
           test -f docs/35_GWAN_Kubernetes_PodDisruptionBudget.md
+          test -f docs/36_GWAN_Kubernetes_NetworkPolicy_Baseline.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -152,6 +153,9 @@ jobs:
 
       - name: Kubernetes PDB check
         run: bash scripts/k8s/pdb_check.sh
+
+      - name: Kubernetes NetworkPolicy check
+        run: bash scripts/k8s/network_policy_check.sh
 
       - name: Kubernetes API health check through port-forward
         run: |
@@ -249,6 +253,10 @@ jobs:
       - name: Production PDB check
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: bash scripts/k8s/pdb_check.sh
+
+      - name: Production NetworkPolicy check
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: bash scripts/k8s/network_policy_check.sh
 
       - name: Production overlay health check through port-forward
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

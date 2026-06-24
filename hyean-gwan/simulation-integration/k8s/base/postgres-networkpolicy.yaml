@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: gwan-postgres-network-policy
+  namespace: hyean-gwan
+  labels:
+    app.kubernetes.io/name: gwan-postgres
+    app.kubernetes.io/part-of: hyean
+    app.kubernetes.io/component: network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: gwan-postgres
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: gwan-api
+      ports:
+        - protocol: TCP
+          port: 5432

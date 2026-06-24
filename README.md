@@ -331,3 +331,30 @@ Next step:
 
 36_GWAN_Kubernetes_NetworkPolicy_Baseline
 
+## 36. GWAN Kubernetes NetworkPolicy Baseline
+
+This step adds baseline Kubernetes NetworkPolicy rules for GWAN.
+
+NetworkPolicy is preventive communication control.
+
+For HYEAN/GWAN, this means unnecessary Pod communication paths are reduced before they become operational risk paths.
+
+Baseline:
+
+- GWAN API allows ingress on TCP 8000.
+- GWAN API allows egress to PostgreSQL on TCP 5432.
+- GWAN API allows DNS egress on TCP/UDP 53.
+- GWAN PostgreSQL allows ingress only from GWAN API on TCP 5432.
+
+Important:
+
+NetworkPolicy enforcement depends on the Kubernetes CNI plugin.
+Local Docker Desktop or kind may create NetworkPolicy objects even if actual packet blocking is not enforced.
+
+Check commands:
+
+cd ~/cloud-native-korea-lab/hyean-gwan/simulation-integration
+kubectl apply -k k8s/overlays/local
+scripts/k8s/rollout_check.sh
+scripts/k8s/network_policy_check.sh
+
