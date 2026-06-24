@@ -564,3 +564,36 @@ Added files:
 Next step:
 
 - `48_GWAN_Kubernetes_StatefulSet_Migration_Cutover_Checklist`
+
+## 48. GWAN Kubernetes StatefulSet Migration Cutover Checklist
+
+GWAN PostgreSQL StatefulSet migration cutover checklist was added.
+
+This step prepares the final pre-cutover gate.
+
+It does not execute real migration.
+
+Checked conditions:
+
+- PostgreSQL Deployment is available
+- PostgreSQL Pod is running
+- PostgreSQL PVC is Bound
+- PostgreSQL Service exists
+- PostgreSQL Secret exists
+- GWAN API ConfigMap exists
+- StatefulSet draft renders
+- backup/restore baseline exists
+- rollback dry run exists
+- active StatefulSet does not exist yet
+- manual GO/NO-GO decision is required
+
+Added files:
+
+- `hyean-gwan/simulation-integration/docs/48_GWAN_Kubernetes_StatefulSet_Migration_Cutover_Checklist.md`
+- `hyean-gwan/simulation-integration/codex/48_gwan_kubernetes_statefulset_migration_cutover_checklist_prompt.md`
+- `hyean-gwan/simulation-integration/scripts/k8s/statefulset_migration_cutover_checklist.sh`
+- `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_statefulset_migration_cutover_checklist.py`
+
+Next step:
+
+- `49_GWAN_Kubernetes_StatefulSet_Cutover_Decision_Gate`
