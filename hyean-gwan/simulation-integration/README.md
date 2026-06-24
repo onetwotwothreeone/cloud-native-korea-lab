@@ -1557,3 +1557,35 @@ Safety rules:
 Next step:
 
 64_GWAN_Kubernetes_StatefulSet_PreMigration_Data_Integrity_Check
+
+## 64_GWAN_Kubernetes_StatefulSet_PreMigration_Data_Integrity_Check
+
+This step adds a read-only data integrity check before any real PostgreSQL StatefulSet migration.
+
+Safety status:
+
+- CURRENT_DECISION=NO_GO
+- APPROVED_BY_OPERATOR=false
+- FINAL_DECISION=NO_GO
+- DATA_INTEGRITY_STATUS=REVIEW_ONLY
+- READ_ONLY_CHECK=true
+- REAL_MIGRATION_EXECUTED=false
+- SECRET_VALUES_EXPORTED=false
+
+Checks:
+
+- PostgreSQL Deployment
+- PostgreSQL Pod
+- postgres-data PVC
+- PostgreSQL Service
+- PostgreSQL Secret metadata
+- GWAN API ConfigMap
+- latest backup file
+- pg_isready
+- SELECT current_database()
+- information_schema.tables
+- local read-only integrity report
+
+Next step:
+
+- 65_GWAN_Kubernetes_StatefulSet_PreMigration_Readiness_Summary
