@@ -1292,3 +1292,32 @@ Added files:
 Next step:
 
 - `47_GWAN_Kubernetes_StatefulSet_Migration_Rollback_Dry_Run`
+
+## 47. GWAN Kubernetes StatefulSet Migration Rollback Dry Run
+
+GWAN PostgreSQL StatefulSet rollback dry-run baseline was added.
+
+This step checks rollback readiness without executing rollback or migration.
+
+Added checks:
+
+- current PostgreSQL Deployment exists
+- current PostgreSQL PVC exists
+- current PostgreSQL Service exists
+- current PostgreSQL Secret exists
+- StatefulSet draft renders
+- backup/restore baseline exists
+- migration runbook contains rollback safety rule
+- real rollback is not executed
+- real migration is not executed
+
+Added files:
+
+- `hyean-gwan/simulation-integration/docs/47_GWAN_Kubernetes_StatefulSet_Migration_Rollback_Dry_Run.md`
+- `hyean-gwan/simulation-integration/codex/47_gwan_kubernetes_statefulset_migration_rollback_dry_run_prompt.md`
+- `hyean-gwan/simulation-integration/scripts/k8s/statefulset_migration_rollback_dry_run_check.sh`
+- `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_statefulset_migration_rollback_dry_run.py`
+
+Next step:
+
+- `48_GWAN_Kubernetes_StatefulSet_Migration_Cutover_Checklist`
