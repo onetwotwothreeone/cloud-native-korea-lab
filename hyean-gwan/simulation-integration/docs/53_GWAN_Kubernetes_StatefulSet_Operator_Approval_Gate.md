@@ -1,5 +1,7 @@
 # 53_GWAN_Kubernetes_StatefulSet_Operator_Approval_Gate
 
+## Operator Approval Gate
+
 ## Purpose
 
 This document defines the final operator approval gate before any PostgreSQL StatefulSet migration is allowed.
