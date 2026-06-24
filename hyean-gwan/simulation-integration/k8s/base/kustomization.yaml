@@ -1,19 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - postgres-rbac.yaml
-  - gwan-api-rbac.yaml
-  - postgres-networkpolicy.yaml
-  - gwan-api-networkpolicy.yaml
-  - gwan-api-pdb.yaml
   - namespace.yaml
-  - postgres-secret.yaml
-- postgres-pvc.yaml
-  - gwan-api-configmap.yaml
   - resourcequota.yaml
   - limitrange.yaml
-  - postgres-service.yaml
-  - postgres-deployment.yaml
+  - gwan-api-rbac.yaml
+  - postgres-rbac.yaml
+  - postgres-secret.yaml
+  - gwan-api-configmap.yaml
+  - postgres-pvc.yaml
   - gwan-api-service.yaml
+  - postgres-service.yaml
   - gwan-api-deployment.yaml
+  - postgres-deployment.yaml
   - gwan-api-hpa.yaml
+  - gwan-api-pdb.yaml
+  - gwan-api-networkpolicy.yaml
+  - postgres-networkpolicy.yaml
