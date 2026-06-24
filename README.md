@@ -301,3 +301,33 @@ with Cloud Native Infrastructure Skills
 Cloud Native Korea Lab은 초보자 친화적인 클라우드 네이티브 학습 기록에서 출발해, AI 데이터 평가와 사람의 피드백을 다루는 실전형 포트폴리오로 성장하는 프로젝트입니다.
 
 최종 목표는 단순히 실습을 많이 하는 것이 아닙니다. 클라우드 네이티브 방식으로 AI 평가 플랫폼을 만들고, 그 과정을 통해 기술력, 제품 사고, 운영 습관을 함께 증명하는 것입니다.
+
+## 35.2. HYEAN/GWAN Prevention Layer Alignment
+
+This step aligns the current GWAN Kubernetes implementation with the updated Prevention Layer project source.
+
+HYEAN/GWAN is not only a response system.
+
+It is a prevention-oriented survival intelligence architecture.
+
+GWAN should later expand beyond current risk scoring and include:
+
+- trend_score
+- imbalance_score
+- early_warning_score
+- recovery_capacity
+- preventive_action_priority
+
+This means Kubernetes work should be explained as preventive operational infrastructure.
+
+Examples:
+
+- HPA supports changing demand.
+- HPA behavior policy prevents unstable scaling.
+- PDB protects availability during voluntary disruption.
+- NetworkPolicy will prevent unnecessary Pod communication risk.
+
+Next step:
+
+36_GWAN_Kubernetes_NetworkPolicy_Baseline
+

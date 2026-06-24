@@ -981,3 +981,32 @@ The workflow now explicitly checks:
 
 This makes sure the Kubernetes reliability rules are not only written, but also verified in CI.
 
+## 35.2. HYEAN/GWAN Prevention Layer Alignment
+
+This step aligns the current GWAN Kubernetes implementation with the updated Prevention Layer project source.
+
+HYEAN/GWAN is not only a response system.
+
+It is a prevention-oriented survival intelligence architecture.
+
+GWAN should later expand beyond current risk scoring and include:
+
+- trend_score
+- imbalance_score
+- early_warning_score
+- recovery_capacity
+- preventive_action_priority
+
+This means Kubernetes work should be explained as preventive operational infrastructure.
+
+Examples:
+
+- HPA supports changing demand.
+- HPA behavior policy prevents unstable scaling.
+- PDB protects availability during voluntary disruption.
+- NetworkPolicy will prevent unnecessary Pod communication risk.
+
+Next step:
+
+36_GWAN_Kubernetes_NetworkPolicy_Baseline
+
