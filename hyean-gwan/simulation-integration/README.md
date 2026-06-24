@@ -1468,3 +1468,35 @@ Current decision:
 This step does not execute real migration.
 This step documents possible risks, prevention actions, and recovery actions.
 
+### 61. GWAN Kubernetes StatefulSet Risk Mitigation Checklist
+
+This step converts the migration risk register into a concrete mitigation checklist.
+
+Current decision:
+
+```text
+CURRENT_DECISION=NO_GO
+APPROVED_BY_OPERATOR=false
+FINAL_DECISION=NO_GO
+REAL_MIGRATION_EXECUTED=false
+```
+
+Verified items:
+
+- PostgreSQL Deployment is still active
+- postgres-data PVC is Bound
+- PostgreSQL Service exists
+- PostgreSQL Secret exists
+- GWAN API ConfigMap exists
+- Active PostgreSQL StatefulSet does not exist yet
+- Data loss risk is mitigated
+- Downtime risk is mitigated
+- Workload conflict risk is mitigated
+- Rollback risk is mitigated
+- Approval bypass risk is mitigated
+
+Next step:
+
+```text
+62_GWAN_Kubernetes_StatefulSet_PreExecution_Safety_Snapshot
+```
