@@ -486,3 +486,26 @@ Related files:
 Next step:
 
 - `45_GWAN_Kubernetes_StatefulSet_Migration_Dry_Run`
+
+## 45. GWAN Kubernetes StatefulSet Migration Dry Run
+
+GWAN PostgreSQL StatefulSet migration dry-run process was added.
+
+Current decision:
+
+- PostgreSQL is still running as Deployment.
+- StatefulSet draft exists.
+- StatefulSet is not applied yet.
+- Backup/restore baseline exists.
+- Migration readiness can now be checked safely.
+
+Added files:
+
+- `hyean-gwan/simulation-integration/scripts/k8s/statefulset_migration_dry_run_check.sh`
+- `hyean-gwan/simulation-integration/docs/45_GWAN_Kubernetes_StatefulSet_Migration_Dry_Run.md`
+- `hyean-gwan/simulation-integration/codex/45_gwan_kubernetes_statefulset_migration_dry_run_prompt.md`
+- `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_statefulset_migration_dry_run.py`
+
+Next step:
+
+- `46_GWAN_Kubernetes_StatefulSet_Migration_Runbook`
