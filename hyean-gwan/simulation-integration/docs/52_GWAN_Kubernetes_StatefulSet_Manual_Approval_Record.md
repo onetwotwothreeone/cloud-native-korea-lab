@@ -16,6 +16,8 @@ FINAL_DECISION=NO_GO
 
 ## Current Workload Status
 
+PostgreSQL is still Deployment
+
 The active PostgreSQL workload is still:
 
 - Kind: Deployment
