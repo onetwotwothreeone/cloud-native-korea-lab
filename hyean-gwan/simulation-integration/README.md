@@ -1401,3 +1401,16 @@ Safety rule:
 - Keep FINAL_DECISION=NO_GO.
 - Confirm that operator approval and required documents are still required.
 
+## 56_GWAN_Kubernetes_StatefulSet_Final_Go_NoGo_Decision
+
+This step records the final GO / NO-GO decision before any real PostgreSQL StatefulSet migration.
+
+Current decision:
+
+- CURRENT_DECISION=NO_GO
+- APPROVED_BY_OPERATOR=false
+- FINAL_DECISION=NO_GO
+
+This step does not execute real migration.
+PostgreSQL remains on the current Deployment + PVC baseline.
+
