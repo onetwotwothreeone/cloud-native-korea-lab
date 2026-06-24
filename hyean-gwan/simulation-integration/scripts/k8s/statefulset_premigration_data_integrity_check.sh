@@ -5,9 +5,11 @@ NAMESPACE="${NAMESPACE:-hyean-gwan}"
 BACKUP_DIR="${BACKUP_DIR:-.local/postgres-backups}"
 BACKUP_MAX_AGE_SECONDS="${BACKUP_MAX_AGE_SECONDS:-86400}"
 
-CURRENT_DECISION="${CURRENT_DECISION:-NO_GO}"
-APPROVED_BY_OPERATOR="${APPROVED_BY_OPERATOR:-false}"
-FINAL_DECISION="${FINAL_DECISION:-NO_GO}"
+# Safety decision is intentionally fixed for this pre-migration check.
+# This script must never approve or execute the real StatefulSet migration.
+CURRENT_DECISION=NO_GO
+APPROVED_BY_OPERATOR=false
+FINAL_DECISION=NO_GO
 REAL_MIGRATION_EXECUTED=false
 SECRET_VALUES_EXPORTED=false
 
