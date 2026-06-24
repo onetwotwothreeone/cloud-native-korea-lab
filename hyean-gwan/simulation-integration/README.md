@@ -967,3 +967,17 @@ kubectl apply -k k8s/overlays/local
 scripts/k8s/rollout_check.sh
 scripts/k8s/pdb_check.sh
 
+
+## 35.1. GWAN Kubernetes HPA Behavior and PDB CI Checks
+
+This step strengthens GWAN CI.
+
+The workflow now explicitly checks:
+
+- HPA behavior policy documentation
+- PodDisruptionBudget documentation
+- HPA behavior check script
+- PDB check script
+
+This makes sure the Kubernetes reliability rules are not only written, but also verified in CI.
+

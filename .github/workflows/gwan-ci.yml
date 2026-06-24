@@ -75,6 +75,8 @@ jobs:
           test -f docs/31_GWAN_Kubernetes_Namespace_ResourceQuota_And_LimitRange.md
           test -f docs/32_GWAN_Kubernetes_HPA_Autoscaling_Baseline.md
           test -f docs/33_GWAN_Kubernetes_Metrics_Server_And_HPA_Readiness.md
+          test -f docs/34_GWAN_Kubernetes_HPA_Behavior_Policy.md
+          test -f docs/35_GWAN_Kubernetes_PodDisruptionBudget.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -144,6 +146,12 @@ jobs:
 
       - name: Kubernetes metrics server readiness check
         run: bash scripts/k8s/metrics_server_check.sh
+
+      - name: Kubernetes HPA behavior policy check
+        run: bash scripts/k8s/hpa_behavior_check.sh
+
+      - name: Kubernetes PDB check
+        run: bash scripts/k8s/pdb_check.sh
 
       - name: Kubernetes API health check through port-forward
         run: |
@@ -233,6 +241,14 @@ jobs:
       - name: Production metrics server readiness check
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: bash scripts/k8s/metrics_server_check.sh
+
+      - name: Production HPA behavior policy check
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: bash scripts/k8s/hpa_behavior_check.sh
+
+      - name: Production PDB check
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: bash scripts/k8s/pdb_check.sh
 
       - name: Production overlay health check through port-forward
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
