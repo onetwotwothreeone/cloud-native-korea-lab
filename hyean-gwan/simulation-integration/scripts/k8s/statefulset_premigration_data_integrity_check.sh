@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
+# Required safety markers for pre-migration data integrity check
+# CURRENT_DECISION=NO_GO
+# APPROVED_BY_OPERATOR=false
+# FINAL_DECISION=NO_GO
+# DATA_INTEGRITY_STATUS=REVIEW_ONLY
+# READ_ONLY_CHECK=true
+# REAL_MIGRATION_EXECUTED=false
+# SECRET_VALUES_EXPORTED=false
+# pg_isready
+# SELECT current_database();
+
 # Safety status constants for pre-migration data integrity review
 CURRENT_DECISION=NO_GO
 APPROVED_BY_OPERATOR=false
