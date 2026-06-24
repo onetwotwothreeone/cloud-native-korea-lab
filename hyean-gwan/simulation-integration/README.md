@@ -1370,3 +1370,21 @@ The real migration is still blocked.
 Next step:
 
 52_GWAN_Kubernetes_StatefulSet_Manual_Approval_Record
+
+## 52. GWAN Kubernetes StatefulSet Manual Approval Record
+
+This step records the current manual approval state before any real PostgreSQL Deployment to StatefulSet migration.
+
+Current decision:
+
+- CURRENT_DECISION: NO_GO
+- APPROVED_BY_OPERATOR: false
+- FINAL_DECISION: NO_GO
+
+The active PostgreSQL workload is still Deployment.
+
+No real StatefulSet migration is executed in this step.
+
+Next step:
+
+53_GWAN_Kubernetes_StatefulSet_Operator_Approval_Template
