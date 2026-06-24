@@ -509,3 +509,29 @@ Added files:
 Next step:
 
 - `46_GWAN_Kubernetes_StatefulSet_Migration_Runbook`
+
+## 46. GWAN Kubernetes StatefulSet Migration Runbook
+
+GWAN PostgreSQL StatefulSet migration runbook was added.
+
+This step does not execute the actual migration.
+
+Added safety gates:
+
+- test gate
+- Kubernetes health gate
+- backup/restore gate
+- StatefulSet draft gate
+- rollback plan
+- stop conditions
+
+Added files:
+
+- `hyean-gwan/simulation-integration/docs/46_GWAN_Kubernetes_StatefulSet_Migration_Runbook.md`
+- `hyean-gwan/simulation-integration/codex/46_gwan_kubernetes_statefulset_migration_runbook_prompt.md`
+- `hyean-gwan/simulation-integration/scripts/k8s/statefulset_migration_runbook_check.sh`
+- `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_statefulset_migration_runbook.py`
+
+Next step:
+
+- `47_GWAN_Kubernetes_StatefulSet_Migration_Rollback_Dry_Run`
