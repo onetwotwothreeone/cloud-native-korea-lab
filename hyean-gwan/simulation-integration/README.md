@@ -1427,3 +1427,16 @@ Current decision:
 This step does not execute real migration.
 PostgreSQL remains on the current Deployment + PVC baseline.
 
+## 58_GWAN_Kubernetes_StatefulSet_Migration_Command_Dry_Run
+
+This step documents and validates the dry-run command plan for a future PostgreSQL Deployment to StatefulSet migration.
+
+Current decision:
+
+- CURRENT_DECISION=NO_GO
+- APPROVED_BY_OPERATOR=false
+- FINAL_DECISION=NO_GO
+
+This step does not execute real migration.
+This step only checks that migration commands are prepared and safe to review.
+
