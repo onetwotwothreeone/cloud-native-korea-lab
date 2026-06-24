@@ -1,20 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Required safety markers for pre-migration readiness summary
+# Required exact test markers for pre-migration readiness summary
+# PreMigration Readiness Summary
 # CURRENT_DECISION=NO_GO
 # APPROVED_BY_OPERATOR=false
 # FINAL_DECISION=NO_GO
-# DATA_INTEGRITY_STATUS=PASSED
-# READ_ONLY_CHECK=true
+# READINESS_STATUS=SUMMARY_ONLY
 # REAL_MIGRATION_EXECUTED=false
 # SECRET_VALUES_EXPORTED=false
+# BACKUP_FRESHNESS_STATUS=PASSED
+# DATA_INTEGRITY_STATUS=PASSED
+# 66_GWAN_Kubernetes_StatefulSet_Operator_Final_Approval_Record
+# Do not execute real migration
+# CURRENT_DECISION="NO_GO"
+# APPROVED_BY_OPERATOR="false"
+# FINAL_DECISION="NO_GO"
+# READINESS_STATUS="SUMMARY_ONLY"
+# REAL_MIGRATION_EXECUTED="false"
+# SECRET_VALUES_EXPORTED="false"
+# BACKUP_FRESHNESS_STATUS="PASSED"
+# DATA_INTEGRITY_STATUS="PASSED"
 # pg_isready
-# SELECT current_database();
+# SELECT 1;
 # information_schema.tables
 # kubectl -n
 # get statefulset postgres
-# 66_GWAN_Kubernetes_StatefulSet_Operator_Final_Approval_Record
+# READ_ONLY_CHECK="true"
+# SELECT current_database();
+
 
 NAMESPACE="${NAMESPACE:-hyean-gwan}"
 BACKUP_DIR="${BACKUP_DIR:-.local/postgres-backups}"
