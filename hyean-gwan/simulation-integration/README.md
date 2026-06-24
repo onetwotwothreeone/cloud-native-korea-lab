@@ -1440,3 +1440,17 @@ Current decision:
 This step does not execute real migration.
 This step only checks that migration commands are prepared and safe to review.
 
+## 59_GWAN_Kubernetes_StatefulSet_Migration_Command_Review
+
+This step reviews the command order for a future PostgreSQL Deployment to StatefulSet migration.
+
+Current decision:
+
+- CURRENT_DECISION=NO_GO
+- APPROVED_BY_OPERATOR=false
+- FINAL_DECISION=NO_GO
+- COMMAND_REVIEW_STATUS=REVIEW_ONLY
+
+This step does not execute real migration.
+This step only reviews the prepared command plan.
+
