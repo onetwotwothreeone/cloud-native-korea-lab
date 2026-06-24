@@ -12,6 +12,7 @@ APPROVED_BY_OPERATOR=false
 FINAL_DECISION=NO_GO
 REAL_MIGRATION_EXECUTED=false
 SECRET_VALUES_EXPORTED=false
+DATA_INTEGRITY_STATUS=REVIEW_ONLY
 
 echo "== 64단계: GWAN Kubernetes StatefulSet PreMigration Data Integrity Check 시작 =="
 echo "Checking GWAN PostgreSQL pre-migration data integrity in namespace: ${NAMESPACE}"
