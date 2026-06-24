@@ -1060,3 +1060,29 @@ kubectl apply -k k8s/overlays/local
 scripts/k8s/rollout_check.sh
 scripts/k8s/rbac_check.sh
 
+## 38. GWAN Kubernetes SecurityContext Baseline
+
+This step adds Kubernetes SecurityContext baseline settings for GWAN.
+
+SecurityContext is preventive runtime control.
+
+For HYEAN/GWAN, this means containers should not run with unnecessary Linux privileges.
+
+Baseline:
+
+- GWAN API runs as non-root.
+- GWAN API disables privilege escalation.
+- GWAN API uses read-only root filesystem.
+- GWAN API drops Linux capabilities.
+- GWAN API mounts /tmp as emptyDir for temporary writes.
+- PostgreSQL uses RuntimeDefault seccomp.
+- PostgreSQL disables privilege escalation.
+- PostgreSQL drops Linux capabilities.
+
+Check commands:
+
+cd ~/cloud-native-korea-lab/hyean-gwan/simulation-integration
+kubectl apply -k k8s/overlays/local
+scripts/k8s/rollout_check.sh
+scripts/k8s/security_context_check.sh
+

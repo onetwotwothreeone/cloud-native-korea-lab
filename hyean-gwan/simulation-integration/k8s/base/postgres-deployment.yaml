@@ -9,6 +9,8 @@ metadata:
     app.kubernetes.io/component: database
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: gwan-postgres
@@ -21,8 +23,25 @@ spec:
     spec:
       serviceAccountName: gwan-postgres-sa
       automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 999
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: postgres
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - CHOWN
+                - FOWNER
+                - DAC_OVERRIDE
+                - SETGID
+                - SETUID
           image: postgres:16-alpine
           imagePullPolicy: IfNotPresent
           ports:

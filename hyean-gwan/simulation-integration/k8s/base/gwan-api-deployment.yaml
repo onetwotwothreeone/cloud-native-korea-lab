@@ -21,14 +21,30 @@ spec:
     spec:
       serviceAccountName: gwan-api-sa
       automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: gwan-api
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
           image: ghcr.io/onetwotwothreeone/hyean-gwan-simulation:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8000
           env:
+            - name: PYTHONDONTWRITEBYTECODE
+              value: "1"
             - name: DATABASE_HOST
               valueFrom:
                 configMapKeyRef:
@@ -61,6 +77,9 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: DATABASE_URL
               value: postgresql+psycopg://$(DATABASE_USER):$(POSTGRES_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/$(DATABASE_NAME)
+          volumeMounts:
+            - name: gwan-api-tmp
+              mountPath: /tmp
           resources:
             requests:
               cpu: 100m
@@ -86,3 +105,6 @@ spec:
               port: 8000
             initialDelaySeconds: 20
             periodSeconds: 10
+      volumes:
+        - name: gwan-api-tmp
+          emptyDir: {}

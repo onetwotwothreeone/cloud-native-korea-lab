@@ -79,6 +79,7 @@ jobs:
           test -f docs/35_GWAN_Kubernetes_PodDisruptionBudget.md
           test -f docs/36_GWAN_Kubernetes_NetworkPolicy_Baseline.md
           test -f docs/37_GWAN_Kubernetes_ServiceAccount_RBAC_Baseline.md
+          test -f docs/38_GWAN_Kubernetes_SecurityContext_Baseline.md
 
       - name: Build Docker image
         run: docker build -t hyean-gwan-simulation:ci .
@@ -160,6 +161,9 @@ jobs:
 
       - name: Kubernetes RBAC check
         run: bash scripts/k8s/rbac_check.sh
+
+      - name: Kubernetes SecurityContext check
+        run: bash scripts/k8s/security_context_check.sh
 
       - name: Kubernetes API health check through port-forward
         run: |
@@ -265,6 +269,10 @@ jobs:
       - name: Production RBAC check
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: bash scripts/k8s/rbac_check.sh
+
+      - name: Production SecurityContext check
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: bash scripts/k8s/security_context_check.sh
 
       - name: Production overlay health check through port-forward
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
