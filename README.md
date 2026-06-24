@@ -407,3 +407,25 @@ kubectl apply -k k8s/overlays/local
 scripts/k8s/rollout_check.sh
 scripts/k8s/security_context_check.sh
 
+## 42. GWAN Kubernetes StatefulSet Migration Plan
+
+GWAN PostgreSQL StatefulSet migration planning was added.
+
+Current decision:
+
+- Do not migrate PostgreSQL to StatefulSet yet.
+- Keep the current Deployment + PVC baseline.
+- Prepare backup, restore, rollback, and storage behavior review first.
+- Treat StatefulSet migration as a controlled database migration, not a simple YAML replacement.
+
+Why this matters:
+
+A database workload must protect data first.  
+Before changing the Kubernetes workload type, the project must prove that data can be backed up, restored, and safely rolled back.
+
+Related files:
+
+- `hyean-gwan/simulation-integration/docs/42_GWAN_Kubernetes_StatefulSet_Migration_Plan.md`
+- `hyean-gwan/simulation-integration/codex/42_gwan_kubernetes_statefulset_migration_plan_prompt.md`
+- `hyean-gwan/simulation-integration/scripts/k8s/statefulset_migration_plan_check.sh`
+- `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_statefulset_migration_plan.py`
