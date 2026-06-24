@@ -942,3 +942,28 @@ scripts/k8s/rollout_check.sh
 scripts/k8s/hpa_check.sh
 scripts/k8s/hpa_behavior_check.sh
 
+
+## 35. GWAN Kubernetes PodDisruptionBudget
+
+This step adds a PodDisruptionBudget for the GWAN API.
+
+The PDB protects GWAN API availability during voluntary Kubernetes disruptions.
+
+Current policy:
+
+minAvailable: 1
+
+Meaning:
+
+- At least 1 GWAN API Pod should remain available during voluntary disruption.
+- If GWAN API has only 1 replica, ALLOWED DISRUPTIONS may be 0.
+- This is expected because the PDB is protecting the only available Pod.
+
+Check commands:
+
+cd ~/cloud-native-korea-lab/hyean-gwan/simulation-integration
+
+kubectl apply -k k8s/overlays/local
+scripts/k8s/rollout_check.sh
+scripts/k8s/pdb_check.sh
+
