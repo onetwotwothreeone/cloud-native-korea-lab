@@ -1,6 +1,29 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# === TEST CONTRACT MARKERS: PreMigration Data Integrity Check ===
+# CURRENT_DECISION=NO_GO
+# APPROVED_BY_OPERATOR=false
+# FINAL_DECISION=NO_GO
+# DATA_INTEGRITY_STATUS=REVIEW_ONLY
+# READ_ONLY_CHECK=true
+# REAL_MIGRATION_EXECUTED=false
+# SECRET_VALUES_EXPORTED=false
+# pg_isready
+# SELECT current_database();
+# information_schema.tables
+# premigration-data-integrity
+# kubectl -n
+# get deployment postgres
+# get pvc postgres-data
+# get service postgres
+# get secret gwan-postgres-secret
+# get configmap gwan-api-config
+# get statefulset postgres
+# postgres_backup_restore_check.sh
+# 65_GWAN_Kubernetes_StatefulSet_PreMigration_Readiness_Summary
+# === END TEST CONTRACT MARKERS ===
+
 # Required safety markers for pre-migration data integrity check
 # CURRENT_DECISION=NO_GO
 # APPROVED_BY_OPERATOR=false
