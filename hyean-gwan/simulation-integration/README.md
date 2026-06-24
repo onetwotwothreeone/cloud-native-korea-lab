@@ -1186,3 +1186,28 @@ Related files:
 - `hyean-gwan/simulation-integration/codex/42_gwan_kubernetes_statefulset_migration_plan_prompt.md`
 - `hyean-gwan/simulation-integration/scripts/k8s/statefulset_migration_plan_check.sh`
 - `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_statefulset_migration_plan.py`
+
+## 43. GWAN Kubernetes PostgreSQL Backup/Restore Baseline
+
+GWAN PostgreSQL backup and restore baseline was added.
+
+Current decision:
+
+- PostgreSQL is still Deployment + PVC.
+- StatefulSet migration is not applied yet.
+- Backup is created with `pg_dump`.
+- Restore is tested in a temporary database.
+- Main database is not overwritten.
+- Backup files are stored under `.local/postgres-backups` and excluded from Git.
+
+Why this matters:
+
+A database backup is only meaningful when restore also works.  
+This step proves that GWAN can protect database data before attempting StatefulSet migration.
+
+Related files:
+
+- `hyean-gwan/simulation-integration/docs/43_GWAN_Kubernetes_PostgreSQL_Backup_Restore_Baseline.md`
+- `hyean-gwan/simulation-integration/codex/43_gwan_kubernetes_postgresql_backup_restore_baseline_prompt.md`
+- `hyean-gwan/simulation-integration/scripts/k8s/postgres_backup_restore_check.sh`
+- `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_postgresql_backup_restore.py`
