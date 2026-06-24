@@ -1354,3 +1354,19 @@ Added files:
 Next step:
 
 - `49_GWAN_Kubernetes_StatefulSet_Cutover_Decision_Gate`
+
+## 51. GWAN Kubernetes StatefulSet Operator Approval Template
+
+This step adds a manual operator approval template before any real PostgreSQL Deployment to StatefulSet migration.
+
+Current decision:
+
+- CURRENT_DECISION: NO_GO
+- APPROVED_BY_OPERATOR: false
+- FINAL_DECISION: NO_GO
+
+The real migration is still blocked.
+
+Next step:
+
+52_GWAN_Kubernetes_StatefulSet_Manual_Approval_Record
