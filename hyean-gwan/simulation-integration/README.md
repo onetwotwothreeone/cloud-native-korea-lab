@@ -1211,3 +1211,35 @@ Related files:
 - `hyean-gwan/simulation-integration/codex/43_gwan_kubernetes_postgresql_backup_restore_baseline_prompt.md`
 - `hyean-gwan/simulation-integration/scripts/k8s/postgres_backup_restore_check.sh`
 - `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_postgresql_backup_restore.py`
+
+## 44. GWAN Kubernetes StatefulSet Draft Manifest
+
+GWAN PostgreSQL StatefulSet draft manifest was added.
+
+Current decision:
+
+- PostgreSQL still runs as Deployment.
+- StatefulSet is not applied yet.
+- A draft Headless Service was created.
+- A draft StatefulSet was created.
+- The draft uses `volumeClaimTemplates`.
+- The draft is kept outside active Kustomize overlays.
+
+Why this matters:
+
+StatefulSet migration should not be rushed.  
+The project now has a safe draft manifest that can be reviewed before actual migration.
+
+Related files:
+
+- `hyean-gwan/simulation-integration/k8s/drafts/postgres-headless-service-draft.yaml`
+- `hyean-gwan/simulation-integration/k8s/drafts/postgres-statefulset-draft.yaml`
+- `hyean-gwan/simulation-integration/k8s/drafts/kustomization.yaml`
+- `hyean-gwan/simulation-integration/docs/44_GWAN_Kubernetes_StatefulSet_Draft_Manifest.md`
+- `hyean-gwan/simulation-integration/codex/44_gwan_kubernetes_statefulset_draft_manifest_prompt.md`
+- `hyean-gwan/simulation-integration/scripts/k8s/statefulset_draft_check.sh`
+- `hyean-gwan/simulation-integration/tests/test_gwan_kubernetes_statefulset_draft.py`
+
+Next step:
+
+- `45_GWAN_Kubernetes_StatefulSet_Migration_Dry_Run`
