@@ -1454,3 +1454,17 @@ Current decision:
 This step does not execute real migration.
 This step only reviews the prepared command plan.
 
+## 60_GWAN_Kubernetes_StatefulSet_Migration_Risk_Register
+
+This step creates a risk register before a future PostgreSQL Deployment to StatefulSet migration.
+
+Current decision:
+
+- CURRENT_DECISION=NO_GO
+- APPROVED_BY_OPERATOR=false
+- FINAL_DECISION=NO_GO
+- RISK_REGISTER_STATUS=REVIEW_ONLY
+
+This step does not execute real migration.
+This step documents possible risks, prevention actions, and recovery actions.
+
