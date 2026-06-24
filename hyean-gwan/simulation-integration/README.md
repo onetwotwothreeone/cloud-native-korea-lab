@@ -1414,3 +1414,16 @@ Current decision:
 This step does not execute real migration.
 PostgreSQL remains on the current Deployment + PVC baseline.
 
+## 57_GWAN_Kubernetes_StatefulSet_Approved_Migration_Execution_Plan
+
+This step documents the approved migration execution plan for a future PostgreSQL Deployment to StatefulSet migration.
+
+Current decision:
+
+- CURRENT_DECISION=NO_GO
+- APPROVED_BY_OPERATOR=false
+- FINAL_DECISION=NO_GO
+
+This step does not execute real migration.
+PostgreSQL remains on the current Deployment + PVC baseline.
+
