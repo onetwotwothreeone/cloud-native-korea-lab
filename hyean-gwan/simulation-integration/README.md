@@ -1500,3 +1500,60 @@ Next step:
 ```text
 62_GWAN_Kubernetes_StatefulSet_PreExecution_Safety_Snapshot
 ```
+
+### 62. GWAN Kubernetes StatefulSet Pre-Execution Safety Snapshot
+
+This step creates a local safety snapshot before any real PostgreSQL StatefulSet migration.
+
+Current decision:
+
+~~~text
+CURRENT_DECISION=NO_GO
+APPROVED_BY_OPERATOR=false
+FINAL_DECISION=NO_GO
+REAL_MIGRATION_EXECUTED=false
+PREEXECUTION_SNAPSHOT_CREATED=true
+SECRET_VALUES_EXPORTED=false
+~~~
+
+Verified items:
+
+- PostgreSQL Deployment is available
+- PostgreSQL Pod is running
+- postgres-data PVC is Bound
+- PostgreSQL Service exists
+- PostgreSQL Secret metadata exists
+- GWAN API ConfigMap exists
+- Active PostgreSQL StatefulSet does not exist yet
+- Secret values are not exported
+- Real migration remains blocked
+
+Snapshot location:
+
+~~~text
+.local/k8s-safety-snapshots/
+~~~
+
+Next step:
+
+~~~text
+63_GWAN_Kubernetes_StatefulSet_Backup_Freshness_Check
+~~~
+
+## 63. GWAN Kubernetes StatefulSet Backup Freshness Check
+
+This step checks whether a recent PostgreSQL backup exists before any real StatefulSet migration is considered.
+
+Safety rules:
+
+- real migration is not executed
+- latest backup file must exist
+- backup age must be within acceptable window
+- PostgreSQL Deployment must still be available
+- PostgreSQL PVC must be Bound
+- secret values must not be exported
+- FINAL_DECISION remains NO_GO
+
+Next step:
+
+64_GWAN_Kubernetes_StatefulSet_PreMigration_Data_Integrity_Check
