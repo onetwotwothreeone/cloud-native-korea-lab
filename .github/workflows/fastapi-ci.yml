@@ -63,5 +63,5 @@ jobs:
 
       - name: Push Docker image to GHCR
         run: |
-          docker push ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform:latest
+          docker push ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform:latest || (echo 'Retrying GHCR push in 15 seconds...' && sleep 15 && docker push ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform:latest) || (echo 'Final retry GHCR push in 45 seconds...' && sleep 45 && docker push ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform:latest)
           docker push ghcr.io/onetwotwothreeone/cnkl-fastapi-mini-platform:${{ github.sha }}
