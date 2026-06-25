@@ -1612,3 +1612,15 @@ This step does not execute real migration.
 Next step:
 
 - 67_GWAN_Kubernetes_StatefulSet_Final_Approval_Gate
+
+## 68_GWAN_Kubernetes_StatefulSet_Final_Preflight_Check
+
+- Purpose: PostgreSQL Deployment to StatefulSet migration 직전 최종 사전점검을 수행한다.
+- Current decision: CURRENT_DECISION=NO_GO
+- Approval: APPROVED_BY_OPERATOR=false
+- Final gate: FINAL_APPROVAL_GATE_STATUS=BLOCKED
+- Preflight: PREFLIGHT_STATUS=PASSED_BUT_BLOCKED
+- Execution: MIGRATION_EXECUTION_ALLOWED=false
+- Safety: 실제 StatefulSet migration은 아직 실행하지 않는다.
+- Portfolio meaning: 운영자가 승인하기 전에는 기술적으로 준비되어도 실제 인프라 변경을 막는 안전한 운영 구조를 증명한다.
+- Next: 69_GWAN_Kubernetes_StatefulSet_Portfolio_Demo_Readiness_Report
