@@ -29,6 +29,20 @@ ai-evaluation-platform = flagship portfolio
 
 ---
 
+## 명칭 정의 (Canonical Naming)
+
+이 저장소의 `hyean-gwan/simulation-integration` 하위 프로젝트는 세 가지 이름으로 불립니다. 모두 **동일한 대상**입니다.
+
+```text
+HYEAN / GWAN  ==  이동형 지구 우주 항법 시스템  ==  Mobile Earth Navigation System
+```
+
+- **HYEAN** = 이동형 우주 거주지를 위한 생존 지향 우주 지능 서비스, **GWAN** = 그 안의 관측·해석·점수·결정·기억 엔진 (git 히스토리에 기록된 명칭).
+- **이동형 지구 우주 항법 시스템 / Mobile Earth Navigation System** = 프로젝트 공식 명칭 (루트 [`CLAUDE.md`](CLAUDE.md)에 정의).
+- 설계 변천사는 [docs/DESIGN_HISTORY.md](docs/DESIGN_HISTORY.md) 참조.
+
+---
+
 ## Main Direction
 
 Cloud Native Korea Lab의 새 통합 방향은 다음 질문에 답하는 것입니다.

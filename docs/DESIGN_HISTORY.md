@@ -8,6 +8,8 @@
 - 작성 기준일: 2026-06-25
 - 작성자 식별자: `Sol Kim <skthf9@gmail.com>` (96) + `onetwotwothreeone <noreply@github>` (72) — 동일인의 서로 다른 git identity (아래 ⚠️-7 참조)
 
+> **명칭 정의 (Canonical Naming)**: 본 문서에서 **HYEAN/GWAN**으로 부르는 시스템은 곧 **이동형 지구 우주 항법 시스템 (Mobile Earth Navigation System)** 이다. 세 표현은 동일한 대상을 가리키며, 프로젝트 공식 명칭은 루트 [`CLAUDE.md`](../CLAUDE.md)에 정의되어 있다. 아래 본문은 git 히스토리에 실제 기록된 명칭(HYEAN/GWAN)을 그대로 사용한다.
+
 ---
 
 ## 1. 한눈에 보는 변천 흐름
@@ -78,7 +80,7 @@
 
 ### Phase 6 — HYEAN / GWAN 시뮬레이션 백엔드 등장 (2026-06-22) ★ 세 번째 큰 피벗
 - `a6af4e2 Add HYEAN GWAN simulation integration with CI` — `hyean-gwan/simulation-integration/` 라는 **완전히 새로운 도메인**이 한 번에 투입(자체 AGENTS.md, codex 프롬프트, docs, tests 포함).
-- 도메인 정의(README): **HYEAN** = 이동형 우주 거주지를 위한 생존 지향 우주 지능 서비스, **GWAN** = 그 안의 관측·해석·점수·결정·기억 엔진.
+- 도메인 정의(README): **HYEAN** = 이동형 우주 거주지를 위한 생존 지향 우주 지능 서비스, **GWAN** = 그 안의 관측·해석·점수·결정·기억 엔진. 이 HYEAN/GWAN 시스템 전체가 곧 **이동형 지구 우주 항법 시스템(Mobile Earth Navigation System)** 이다 (CLAUDE.md 기준 공식 명칭).
 - 작업 방식: **Codex 프롬프트 → docs 단계 문서 → 구현/테스트**를 번호(09, 10, 11 …)로 이어가는 파이프라인.
 - **설계 의도**: Phase 4에서 익힌 클라우드 네이티브 전달 체인을, 추상적인 "AI 평가 플랫폼" 대신 구체적 스토리(우주 생존 엔진) 위에서 끝까지 구현.
 - ⚠️ GWAN은 이후 저장소에서 **가장 활발한 프로젝트(71 commits)**가 되지만, 루트 README의 "Current Core Projects"에는 **등재되지 않음** (⚠️-2).
