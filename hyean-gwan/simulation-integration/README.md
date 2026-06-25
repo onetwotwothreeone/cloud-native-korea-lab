@@ -61,7 +61,7 @@ pytest -q
 Expected result:
 
 ```text
-70 passed
+329 passed
 ```
 
 ## Project structure
@@ -115,7 +115,7 @@ pytest -q
 Expected:
 
 ```text
-70 passed
+329 passed
 ```
 
 ## Quick start: FastAPI docs
