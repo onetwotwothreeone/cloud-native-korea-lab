@@ -1589,3 +1589,26 @@ Checks:
 Next step:
 
 - 65_GWAN_Kubernetes_StatefulSet_PreMigration_Readiness_Summary
+
+## 66. GWAN Kubernetes StatefulSet Operator Final Approval Record
+
+This step records the final operator approval state before PostgreSQL Deployment to StatefulSet migration.
+
+Safety status:
+
+- CURRENT_DECISION=NO_GO
+- APPROVED_BY_OPERATOR=false
+- FINAL_DECISION=NO_GO
+- OPERATOR_FINAL_APPROVAL_STATUS=NOT_APPROVED
+- READINESS_STATUS=SUMMARY_ONLY
+- BACKUP_FRESHNESS_STATUS=PASSED
+- DATA_INTEGRITY_STATUS=PASSED
+- READ_ONLY_CHECK=true
+- REAL_MIGRATION_EXECUTED=false
+- SECRET_VALUES_EXPORTED=false
+
+This step does not execute real migration.
+
+Next step:
+
+- 67_GWAN_Kubernetes_StatefulSet_Final_Approval_Gate
