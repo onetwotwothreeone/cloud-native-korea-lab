@@ -1624,3 +1624,18 @@ Next step:
 - Safety: 실제 StatefulSet migration은 아직 실행하지 않는다.
 - Portfolio meaning: 운영자가 승인하기 전에는 기술적으로 준비되어도 실제 인프라 변경을 막는 안전한 운영 구조를 증명한다.
 - Next: 69_GWAN_Kubernetes_StatefulSet_Portfolio_Demo_Readiness_Report
+
+## 70_GWAN_Kubernetes_StatefulSet_Portfolio_Demo_Script
+
+- Purpose: PostgreSQL StatefulSet migration 안전 작업을 포트폴리오 발표용 데모 스크립트로 정리한다.
+- HYEAN goal: HYEAN_SERVICE_GOAL=PREVENTIVE_SURVIVAL_INTELLIGENCE
+- Demo title: DEMO_TITLE=HYEAN_GWAN_POSTGRESQL_STATEFULSET_SAFETY_DEMO
+- Demo status: DEMO_STATUS=READY_FOR_PORTFOLIO_REVIEW
+- Current decision: CURRENT_DECISION=NO_GO
+- Final gate: FINAL_APPROVAL_GATE_STATUS=BLOCKED
+- Preflight: PREFLIGHT_STATUS=PASSED_BUT_BLOCKED
+- Execution: MIGRATION_EXECUTION_ALLOWED=false
+- StatefulSet: STATEFULSET_STATUS=NOT_CREATED
+- DB mode: POSTGRES_CURRENT_MODE=DEPLOYMENT_WITH_PVC
+- Safety: 실제 migration은 실행하지 않고, 안전하게 차단된 상태를 데모로 설명한다.
+- Next: 71_GWAN_Kubernetes_StatefulSet_Portfolio_Demo_Readme
