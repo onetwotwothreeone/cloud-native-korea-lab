@@ -1,5 +1,7 @@
 # HYEAN / GWAN Prototype
 
+> **공식 명칭 / Canonical name**: HYEAN/GWAN 시스템 전체는 곧 **이동형 지구 우주 항법 시스템 (Mobile Earth Navigation System)** 이다. 세 표현(HYEAN/GWAN · 이동형 지구 우주 항법 시스템 · Mobile Earth Navigation System)은 동일한 대상을 가리킨다. 프로젝트 작업 규칙은 루트 [`CLAUDE.md`](../../CLAUDE.md), 설계 이력은 [`docs/DESIGN_HISTORY.md`](../../docs/DESIGN_HISTORY.md) 참조.
+
 HYEAN is a survival-oriented space intelligence service for mobile human habitats.
 
 GWAN is the core observation, interpretation, scoring, decision, and memory engine inside HYEAN.
