@@ -12,25 +12,10 @@ from typing import Optional
 
 from pydantic import BaseModel, Field, field_validator
 
-
-class PreventionStatus(str, Enum):
-    """예방(흐름) 상태. severity(순간)와 별개 축. shelter_or_abort 채택(SPEC 4절)."""
-
-    NORMAL = "normal"
-    WATCH = "watch"
-    ADJUST = "adjust"
-    RESTRICT = "restrict"
-    SHELTER_OR_ABORT = "shelter_or_abort"
-
-
-class HolisticState(str, Enum):
-    """severity × prevention 을 함께 본 서술적 상태(행동 강제 아님, SPEC 7.3)."""
-
-    STABLE = "stable"
-    EARLY_DRIFT = "early_drift"
-    ACUTE_BUFFERED_RECOVERABLE = "acute_buffered_recoverable"
-    COMPOUND_ESCALATION = "compound_escalation"
-    PREVENTION_ONLY = "prevention_only"
+# PreventionStatus·HolisticState 의 '정의'는 계약(schemas)으로 내렸다(H4 D2-i, 값 복제 금지·드리프트 방지).
+# 여기서는 import·재노출만 해 기존 import 경로를 보존한다(R4 가드):
+#   from app.services.prevention.models import PreventionStatus, HolisticState
+from app.schemas.gwan_interface import HolisticState, PreventionStatus
 
 
 class FlowAxis(str, Enum):

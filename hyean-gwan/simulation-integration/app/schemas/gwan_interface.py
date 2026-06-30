@@ -318,12 +318,53 @@ class GWANOutputPackages(ContractBaseModel):
     decision_report_package: DecisionReportPackage | None = None
 
 
+class PreventionStatus(str, Enum):
+    """예방(흐름) 상태. severity(순간)와 별개 축. shelter_or_abort 채택. [계약 정의처: H4 D2-i]"""
+
+    NORMAL = "normal"
+    WATCH = "watch"
+    ADJUST = "adjust"
+    RESTRICT = "restrict"
+    SHELTER_OR_ABORT = "shelter_or_abort"
+
+
+class HolisticState(str, Enum):
+    """severity × prevention 을 함께 본 서술적 상태(행동 강제 아님). [계약 정의처: H4 D2-i]"""
+
+    STABLE = "stable"
+    EARLY_DRIFT = "early_drift"
+    ACUTE_BUFFERED_RECOVERABLE = "acute_buffered_recoverable"
+    COMPOUND_ESCALATION = "compound_escalation"
+    PREVENTION_ONLY = "prevention_only"
+
+
+class PreventionReport(ContractBaseModel):
+    """예방 평가(PreventionAssessment)의 계약용 거울. (H4 (가))
+
+    severity_context + prevention_status + holistic_state 를 한 객체에 함께 담아
+    순간(severity)과 흐름(prevention) 두 축을 페이로드에서 나란히 보이게 한다. (H4 (나))
+    행동 게이트 금지선(D4): recommended_action 필드를 두지 않는다.
+    """
+
+    trend_score: Score = Field(..., ge=0.0, le=1.0)
+    imbalance_score: Score = Field(..., ge=0.0, le=1.0)
+    early_warning_score: Score = Field(..., ge=0.0, le=1.0)
+    recovery_capacity: Score = Field(..., ge=0.0, le=1.0)
+    preventive_action_priority: Score = Field(..., ge=0.0, le=1.0)
+    prevention_status: PreventionStatus
+    severity_context: str | None = None  # echo only (침범 금지)
+    holistic_state: HolisticState
+    reason_codes: list[str] = Field(default_factory=list)
+    reason_summary: str
+
+
 class GWANInterfacePayload(ContractBaseModel):
     schema_version: str = Field(default="hyean.gwan.interface.v0.1")
     generated_at: datetime
     mission_context: MissionContext
     coordinate_reference: CoordinateReference
     packages: GWANOutputPackages
+    prevention: PreventionReport | None = None  # H4 (가): 최상위 옵션 자리(횡단 평가). D1·D7(v0.1 유지)
 
     @model_validator(mode="after")
     def validate_cross_package_contract(self) -> Self:
