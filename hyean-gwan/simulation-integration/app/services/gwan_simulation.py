@@ -44,6 +44,9 @@ from app.schemas.gwan_interface import (
     VisualMarkerType,
 )
 from app.services.gwan_scoring import GWANScoringCase, GWANScoringDecision, ScoringInputs, recommend_action
+from app.services.prevention import assess_prevention
+from app.services.prevention.contract_adapter import to_prevention_report
+from app.services.prevention.models import PreventionInput
 
 
 class GWANSimulationRequest(ContractBaseModel):
@@ -430,3 +433,19 @@ def generate_first_simulation_payload(request: GWANSimulationRequest | None = No
     """Backward-compatible helper returning only the interface payload."""
 
     return generate_integrated_simulation_result(request).payload
+
+
+def generate_simulation_with_prevention(
+    prevention_input: PreventionInput,
+    request: GWANSimulationRequest | None = None,
+) -> IntegratedSimulationResult:
+    """중간 연결(H4): 기존 빌더 위에 예방 평가를 얇게 얹어 payload.prevention 을 채운다.
+
+    기존 빌더(generate_integrated_simulation_result)는 '호출'만 하고 수정하지 않는다.
+    prevention_input 은 호출자가 명시 제공(길 A, 데이터 날조 0). severity_context 는 그 값을 그대로 쓴다
+    (자동 동기화·교차검증 없음). 행동 게이트도 만들지 않는다(SPEC 부록 M0~M2).
+    """
+    result = generate_integrated_simulation_result(request)  # 기존 빌더 무수정, 호출만
+    report = to_prevention_report(assess_prevention(prevention_input))
+    enriched_payload = result.payload.model_copy(update={"prevention": report})
+    return result.model_copy(update={"payload": enriched_payload})

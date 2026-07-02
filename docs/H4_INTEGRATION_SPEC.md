@@ -117,3 +117,57 @@ GWANInterfacePayload                            GWANInterfacePayload
 - [ ] **D7 schema_version**: v0.1 유지(추가-옵션, 비파괴) vs v0.2 bump.
 
 > 확정되면, 구현은 내일 **3단계(테스트 먼저: 어댑터·자리·'행동필드 없음'·비파괴 검증)** 부터. 코드는 오늘 건드리지 않는다.
+
+---
+
+# 부록: 중간 연결 (Mid-Connection) — 예방을 '한 곳 흐름'에서 populate
+
+> 상태: **초안(검토 대기) · 코드 미작성.** (가)+(나)의 계약 자리(위 본문)가 커밋(`f3639e8`)된 뒤, 그 자리를 **실제로 채우는 첫 흐름**을 만드는 단계.
+> 확정 전제: **길 A**(호출자가 명시적 `PreventionInput` 제공, 데이터 날조 0) + **엔드포인트 미노출**(서비스 함수+테스트만, D6 보류 유지).
+
+## M0. 범위 / 경계
+- ✅ 기존 빌더는 **무수정**, 그 위에 얇게 얹는 **새 래퍼 함수 하나**로 예방을 populate.
+- ❌ 기존 빌더 내부 삽입(=`/simulate`·`/simulate-integrated` 자동 populate), `gwan_judgment`/`gwan_scoring` 수정, severity 자동 동기화·교차검증, 행동 게이트, `routes_gwan.py` 변경 — 모두 범위 밖.
+
+## M1. 새 래퍼 함수 — 이름 · 시그니처 · 위치
+- 위치: `app/services/gwan_simulation.py` (기존 빌더 옆).
+- 시그니처(권장):
+
+```python
+def generate_simulation_with_prevention(
+    prevention_input: PreventionInput,
+    request: GWANSimulationRequest | None = None,
+) -> IntegratedSimulationResult:
+```
+
+- `prevention_input`: **필수**(길 A). 거주체 흐름 readings를 호출자가 제공. `severity_context`는 그 안의 값(또는 None)을 그대로 사용(자동 동기화 없음).
+- 동작(기존 빌더는 '호출'만):
+
+```text
+1. result   = generate_integrated_simulation_result(request)     # 기존 빌더 무수정, 호출만
+2. assessment = assess_prevention(prevention_input)              # 예방 실제 작동
+3. report   = to_prevention_report(assessment)                   # 계약 거울(위 본문 (가))
+4. enriched = result.payload.model_copy(update={"prevention": report})
+5. return result.model_copy(update={"payload": enriched})
+```
+
+## M2. 반환 타입 — `IntegratedSimulationResult` (기존 타입 재사용, 무변경)
+- 반환: `IntegratedSimulationResult` — `payload.prevention`이 채워지고 `object_decisions`는 보존.
+- 이유: 기존 타입 재사용(신규 타입·스키마 변경 0), 정보 손실 없음, enriched payload는 `.payload`로 접근.
+- prevention은 이미 `payload.prevention`에 들어가므로 `IntegratedSimulationResult`에 prevention 필드를 **추가하지 않는다**(스키마 무변경).
+- payload만 필요하면 `.payload` 접근으로 충분 — payload-only 헬퍼는 지금 불필요.
+
+## M3. 새 의존성 (레이어 확인)
+- `gwan_simulation` → `app.services.prevention`(`assess_prevention`) + `app.services.prevention.contract_adapter`(`to_prevention_report`).
+- 동일 레이어(services→services), **순환 없음**(prevention은 `gwan_simulation`을 import 안 함).
+
+## M4. 3단계에서 못박을 검사(미리 정리)
+- 진짜 `PreventionInput` 주입 시 `payload.prevention`이 실제로 채워짐.
+- 채워진 `prevention` 값이 `assess_prevention` 결과와 **100% 일치**(품질 가드).
+- 채워진 뒤에도 기존 5 package **무변경**(비파괴).
+- 채워진 페이로드가 `ContractBaseModel` 규약 **위반 없음**(새 품질 가드).
+- `prevention_input` 미주입 기존 빌더 경로는 여전히 **`prevention=None`**(경계).
+
+## M5. 확정 필요 (M-D)
+- [ ] **M-D1 시그니처**: `generate_simulation_with_prevention(prevention_input, request=None)` — 이름·인자 순서 동의?
+- [ ] **M-D2 반환 타입**: `IntegratedSimulationResult` 재사용(권장) vs `GWANInterfacePayload`(payload만).
