@@ -13,7 +13,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Literal
 
-from pydantic import Field
+from pydantic import ConfigDict, Field
 
 from app.schemas.gwan_interface import (
     AlertCategory,
@@ -46,7 +46,7 @@ from app.schemas.gwan_interface import (
 from app.services.gwan_scoring import GWANScoringCase, GWANScoringDecision, ScoringInputs, recommend_action
 from app.services.prevention import assess_prevention
 from app.services.prevention.contract_adapter import to_prevention_report
-from app.services.prevention.models import PreventionInput
+from app.services.prevention.models import PreventionInput, PreventionReading
 
 
 class GWANSimulationRequest(ContractBaseModel):
@@ -433,6 +433,30 @@ def generate_first_simulation_payload(request: GWANSimulationRequest | None = No
     """Backward-compatible helper returning only the interface payload."""
 
     return generate_integrated_simulation_result(request).payload
+
+
+class StrictPreventionReading(PreventionReading):
+    """요청 전용 strict 거울 (D6 '문 전체 엄격').
+
+    config 만 extra=forbid 로 덮어쓴다 — 필드·검증 로직은 전부 상속(복제 없음).
+    원본 PreventionReading 은 내부 유연성을 위해 무수정 유지.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+
+class StrictPreventionInput(PreventionInput):
+    """요청 전용 strict 거울 (D6). 외부 문에서 오타 필드가 조용히 무시되는 착시를 차단한다."""
+
+    model_config = ConfigDict(extra="forbid")
+    readings: list[StrictPreventionReading] = Field(..., min_length=1)
+
+
+class SimulationWithPreventionRequest(ContractBaseModel):
+    """POST /gwan/simulate-with-prevention 요청 봉투 (extra=forbid — ContractBaseModel 상속)."""
+
+    prevention_input: StrictPreventionInput
+    request: GWANSimulationRequest | None = None
 
 
 def generate_simulation_with_prevention(
