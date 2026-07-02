@@ -71,8 +71,10 @@ from app.services.gwan_memory_postgres_design import (
 from app.services.gwan_simulation import (
     GWANSimulationRequest,
     IntegratedSimulationResult,
+    SimulationWithPreventionRequest,
     generate_first_simulation_payload,
     generate_integrated_simulation_result,
+    generate_simulation_with_prevention,
 )
 
 router = APIRouter(prefix="/gwan", tags=["gwan"])
@@ -99,6 +101,18 @@ def simulate_gwan_payload_with_decisions(
     """Generate payload plus object-level scoring decisions for review and tests."""
 
     return generate_integrated_simulation_result(request)
+
+
+@router.post("/simulate-with-prevention", response_model=IntegratedSimulationResult)
+def simulate_gwan_payload_with_prevention(
+    body: SimulationWithPreventionRequest,
+) -> IntegratedSimulationResult:
+    """Generate a prevention-enriched GWAN simulation payload (D6).
+
+    요청 봉투와 내부(prevention_input·readings)까지 extra=forbid — 오타 필드는 422 로 반려된다.
+    """
+
+    return generate_simulation_with_prevention(body.prevention_input, body.request)
 
 
 @router.post("/score", response_model=GWANScoringDecision)
